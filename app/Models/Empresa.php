@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Consultorio;
+use App\Models\User;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 
@@ -38,5 +39,10 @@ class Empresa extends Model
     public function consultorios()
     {
         return $this->hasMany(Consultorio::class);
+    }
+
+    public function usuarios()
+    {
+        return $this->hasMany(User::class);
     }
 }

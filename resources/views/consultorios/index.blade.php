@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@section('title', __('Consultorios'))
 @section('css')
   <!-- Page JS Plugins CSS -->
   <link rel="stylesheet" href="{{ asset('js/plugins/datatables/dataTables.bootstrap4.css') }}">
@@ -39,6 +39,7 @@
       $('#consultoriosTable').DataTable({
         oLanguage: {
           sProcessing  : "<i class='fa fa-spinner fa-spin'></i> Cargando registros...",
+          searchPlaceholder: "Buscar registro",
         },
         language: {
           url: '//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json'
@@ -58,6 +59,48 @@
           {targets: [2], orderable: false},
         ]
       });
+    });
+    //--CODIGO PARA ELIMINAR USUARIO------------------//
+    $('body').on('click', '#eliminarConsultorio', function() {
+      var id = $(this).data('mc');
+      Swal.fire({
+        title: '¿Estás seguro que desea eliminar este consultorio?',
+        text: "¡Esta opción no podrá deshacerse en el futuro!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: '¡Si, Eliminar!',
+        cancelButtonText: 'No, Cancelar!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          $.ajaxSetup({
+            headers: {
+              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+          });
+          $.ajax({
+            type:"DELETE",
+            url: "consultorios/"+id+"",
+            data: { id: id },
+            dataType: 'json',
+            success: function(data){
+              Toast.fire({
+                icon: data.icono,
+                title: data.mensaje
+              })
+              var oTable = $('#consultoriosTable').dataTable();
+              oTable.fnDraw(false);
+            },
+            error: function (data) {
+              Toast.fire({
+                icon: 'error',
+                title: 'Error del servidor, consultorio no eliminado.'
+              })
+            }
+          });
+        }
+      })
     });
   </script>
   <!-- Page JS Plugins -->

@@ -31,6 +31,10 @@ class TipoUsuarioSeeder extends Seeder
             [
             'nombre'                => 'Paciente',
             'slug'                  =>  Str::slug('paciente', '-')
+            ],
+            [
+            'nombre'                => 'Secretario(a)',
+            'slug'                  =>  Str::slug('Secretario', '-')
             ]
         ]);
     }

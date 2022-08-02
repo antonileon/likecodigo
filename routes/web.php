@@ -6,6 +6,8 @@ use App\Http\Controllers\EmpresaController;
 use App\Http\Controllers\ConsultorioController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\MedicoController;
+use App\Http\Controllers\PacienteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,17 +40,22 @@ Route::group(['middleware' => ['web', 'auth']], function() {
     ########------------------------CONSULTORIOS-------------------------------------------------########
     Route::get('/consultorios/get-index',[ConsultorioController::class, 'getIndex']);
     Route::post('/consultorios/buscar-empresas',[ConsultorioController::class, 'buscarEmpresas']);
-    ########------------------------Roles---------------------------------------------------------########
+    ########------------------------ROLES---------------------------------------------------------########
     Route::get('/roles/get-index',[RoleController::class, 'getIndex']);
-    ########------------------------Permisos------------------------------------------------------########
+    ########------------------------PERMISOS------------------------------------------------------########
     Route::get('/permissions/get-index',[PermissionController::class, 'getIndex']);
-    #########------------------------Resources----------------------------------------------------########
+    ########------------------------MEDICOS------------------------------------------------------########
+    Route::get('/medicos/get-index',[MedicoController::class, 'getIndex']);
+    #########------------------------PACIENTES---------------------------------------------------########
+    #########------------------------Resources---------------------------------------------------########
     Route::resources([
-        'users' => UsersController::class,
-        'empresas' => EmpresaController::class,
-        'consultorios' => ConsultorioController::class,
-        'roles' => RoleController::class,
-        'permissions' => PermissionController::class,
+        'users'             => UsersController::class,
+        'empresas'          => EmpresaController::class,
+        'consultorios'      => ConsultorioController::class,
+        'roles'             => RoleController::class,
+        'permissions'       => PermissionController::class,
+        'medicos'           => MedicoController::class,
+        'pacientes'         => PacienteController::class,
     ]);
 });
 

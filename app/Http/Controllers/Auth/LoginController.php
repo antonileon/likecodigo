@@ -49,12 +49,15 @@ class LoginController extends Controller
 
     protected function credentials(\Illuminate\Http\Request $request)
     {
-        return ['email' => $request->email, 'password' => $request->password,'status'=>'Activo'];
+        return [
+            'email'         => $request->email,
+            'password'      => $request->password,
+            'status'        => 'Activo'
+        ];
     }
 
     protected function sendFailedLoginResponse(\Illuminate\Http\Request $request)
     {
-
         if ( !User::where('email', $request->email)->first() ) {
             return redirect()->back()
                 ->withInput($request->only($request->email, 'email'))
@@ -70,6 +73,16 @@ class LoginController extends Controller
                     'email' => 'Usuario desactivado, contacte con el equipo de soporte.',
                 ]);
         }
+        /*$usuario = User::join('empresas','empresas.id','=','users.empresa_id')
+                        ->where('users.email', $request->email)
+                        ->select('empresas.status')->first()->toArray();
+        if ($usuario['status']!='Activo') {
+            return redirect()->back()
+                ->withInput($request->only($request->email, 'email'))
+                ->withErrors([
+                    'email' => 'Empresa se encuentra inactiva, contacte con el equipo de soporte.',
+                ]);
+        }*/
 
         if ( !User::where([['email', $request->email],['password', bcrypt($request->password)]])->first() ) {
             return redirect()->back()
@@ -78,8 +91,5 @@ class LoginController extends Controller
                     'email' => 'Error de autentificación',
                 ]);
         }
-
-
-
     }
 }

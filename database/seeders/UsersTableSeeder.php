@@ -17,8 +17,8 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         User::create([
+            'empresa_id'            => null,
             'tipo_usuario_id'       => 1,
-            'tipo_documento_id'     => 1,
             'nombre'                => 'Antoni',
             'apellido'              => 'Leon',
             'nombre_usuario'        => 'root',

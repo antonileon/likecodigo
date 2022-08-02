@@ -19,7 +19,7 @@
       <label class="css-control css-control-sm css-control-success css-switch">
         <input type="checkbox" class="css-control-input" name="permissions[]" value="{{ $id }}">
         <span class="css-control-indicator"></span> {{ $permission }}
-      </label>                  
+      </label>
     </div>
     @endforeach
   </div>

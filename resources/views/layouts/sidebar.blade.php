@@ -26,7 +26,7 @@
         <div class="content-header-item">
           <a class="link-effect font-w700" href="/">
             <i class="si si-fire text-primary"></i>
-            <span class="font-size-xl text-dual-primary-dark">Like</span><span class="font-size-xl text-primary">Dental</span>
+            <span class="font-size-xl text-dual-primary-dark">Like</span><span class="font-size-xl text-primary">Código</span>
           </a>
         </div>
         <!-- END Logo -->
@@ -52,7 +52,9 @@
           </a>
           <ul class="list-inline mt-10">
             <li class="list-inline-item">
-              <a class="link-effect text-dual-primary-dark font-size-sm font-w600 text-uppercase" href="javascript:void(0)">{!! substr(\Auth::User()->nombre,0,1) !!}. {!!\Auth::User()->apellido!!}</a>
+              <a class="link-effect text-dual-primary-dark font-size-sm font-w600 text-uppercase" href="javascript:void(0)">
+                {!! empty(\Auth::User()->empresa->nombre)?\Auth::User()->tipo_usuario->nombre:\Auth::User()->empresa->nombre !!}
+              </a>
             </li>
             <li class="list-inline-item">
               <!-- Layout API, functionality initialized in Template._uiApiLayout() -->
@@ -87,8 +89,18 @@
           </li>
           @endcan
           <li>
-            <a href="{{ route('consultorios.index') }}" class="{{ request()->is('consultorio*') ? ' active' : '' }}">
+            <a href="{{ route('consultorios.index') }}" class="{{ request()->is('consultorios*') ? ' active' : '' }}">
               <i class="fa fa-hospital-o"></i><span class="sidebar-mini-hide">Consultorios</span>
+            </a>
+          </li>
+          <li>
+            <a href="{{ route('medicos.index') }}" class="{{ request()->is('medicos*') ? ' active' : '' }}">
+              <i class="fa fa-hospital-o"></i><span class="sidebar-mini-hide">Médicos</span>
+            </a>
+          </li>
+          <li>
+            <a href="{{ route('pacientes.index') }}" class="{{ request()->is('pacientes*') ? ' active' : '' }}">
+              <i class="fa fa-hospital-o"></i><span class="sidebar-mini-hide">Pacientes</span>
             </a>
           </li>
           <li class="nav-main-heading">

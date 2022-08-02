@@ -20,7 +20,7 @@
       </div>
       <div class="block-content block-content-full">
         <form action="{{ route('users.store') }}" method="POST" enctype="multipart/form-data" autocomplete="off">
-          @include('users._formulario', ['btnText' => 'Guardar'])
+          @include('users.partials._formulario', ['btnText' => 'Guardar'])
         </form>
       </div>
     </div>

@@ -13,17 +13,19 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('medicos', function (Blueprint $table) {
+        Schema::create('personas', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('persona_id')
+            $table->foreignId('tipo_documento_id')
                     ->constrained()
                     ->onUpdate('cascade')
                     ->onDelete('cascade');
-            $table->foreignId('user_id')
-                    ->constrained()
-                    ->onUpdate('cascade')
-                    ->onDelete('cascade');
-            $table->string('slug')->unique();
+            $table->string('numero_identificacion',50);
+            $table->string('nombre',50);
+            $table->string('apellido',50);
+            $table->date('fecha_nacimiento');
+            $table->string('telefono',15);
+            $table->enum('genero',['Masculino','Femenino','Otros']);
+            $table->text('direccion');
             $table->timestamps();
         });
     }
@@ -35,6 +37,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('medicos');
+        Schema::dropIfExists('personas');
     }
 };

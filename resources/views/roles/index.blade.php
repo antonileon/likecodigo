@@ -39,7 +39,8 @@
           sProcessing  : "<i class='fa fa-spinner fa-spin'></i> Cargando registros...",
         },
         language: {
-          url: '//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json'
+          url: '//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json',
+          searchPlaceholder: "Buscar registro",
         },
         processing: true,
         serverSide: true,
@@ -57,10 +58,9 @@
       });
     });
 
-    //--CODIGO PARA ELIMINAR PBX ---------------------//
+    //--CODIGO PARA ELIMINAR ROL------------------//
     $('body').on('click', '#eliminarRol', function() {
-      var id = $(this).data('id');
-      console.log(id);
+      var id = $(this).data('mc');
       Swal.fire({
         title: '¿Estás seguro que desea eliminar este rol?',
         text: "¡Esta opción no podrá deshacerse en el futuro!",
@@ -72,18 +72,29 @@
         cancelButtonText: 'No, Cancelar!'
       }).then((result) => {
         if (result.isConfirmed) {
+          $.ajaxSetup({
+            headers: {
+              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+          });
           $.ajax({
             type:"DELETE",
             url: "roles/"+id+"",
             data: { id: id },
             dataType: 'json',
-            success: function(response){
-              Swal.fire ( response.titulo ,  response.message ,  response.icono );
+            success: function(data){
+              Toast.fire({
+                icon: data.icono,
+                title: data.mensaje
+              })
               var oTable = $('#rolesTable').dataTable();
               oTable.fnDraw(false);
             },
             error: function (data) {
-              Swal.fire({title: "Error del sistema", text:  "Rol no eliminada", icon:  "error"});
+              Toast.fire({
+                icon: 'error',
+                title: 'Error del servidor, rol no eliminado.'
+              })
             }
           });
         }

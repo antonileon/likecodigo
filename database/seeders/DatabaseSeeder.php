@@ -16,8 +16,9 @@ class DatabaseSeeder extends Seeder
         $this->call(RoleSeeder::class);
         $this->call(TipoUsuarioSeeder::class);
         $this->call(TipoDocumentoSeeder::class);
+        $this->call(EmpresaSeeder::class);
         $this->call(UsersTableSeeder::class);
-        //\App\Models\Empresa::factory(5)->create();
         \App\Models\Consultorio::factory(5)->create();
+        //\App\Models\Empresa::factory(5)->create();
     }
 }

@@ -1,8 +1,6 @@
 @extends('layouts.app')
 
 @section('css')
-  <!-- Page JS Plugins CSS -->
-  <link rel="stylesheet" href="{{ asset('js/plugins/datatables/dataTables.bootstrap4.css') }}">
 @endsection
 
 @section('content')
@@ -20,7 +18,7 @@
       </div>
       <div class="block-content block-content-full">
         <form action="{{ route('empresas.store') }}" method="POST" enctype="multipart/form-data" autocomplete="off">
-          @include('empresas._formulario', ['btnText' => 'Guardar'])
+          @include('empresas.partials._formulario', ['btnText' => 'Guardar'])
         </form>
       </div>
     </div>

@@ -34,18 +34,25 @@ class UsersController extends Controller
         $columnSortOrder    =       $orderArray[0]['dir']; // This will get us order direction(ASC/DESC)
         $searchValue        =       $searchArray['value']; // This is search value 
 
-        $users = \DB::table('users');
-        $total = $users->count();
-        $totalFilter = User::select('id','nombre','apellido','email');
+        if (\Auth::User()->tipo_usuario_id!=1) {
+            $usuarios = User::where('empresa_id',\Auth::User()->empresa->id);
+        } else {
+            $usuarios = User::all();
+        }
+        $total = $usuarios->count();
+        $totalFilter = User::select('id','slug','nombre','apellido','email','tipo_usuario_id','empresa_id','status');
         if (!empty($searchValue)) {
             $totalFilter = $totalFilter->where('nombre','like','%'.$searchValue.'%');
             $totalFilter = $totalFilter->orWhere('apellido','like','%'.$searchValue.'%');
             $totalFilter = $totalFilter->orWhere('email','like','%'.$searchValue.'%');
         }
+        if (\Auth::User()->tipo_usuario_id!=1) {
+            $totalFilter = $totalFilter->where('empresa_id',\Auth::User()->empresa->id);
+        }
         $totalFilter = $totalFilter->count();
 
 
-        $arrData =User::select('id','nombre','apellido','email');
+        $arrData =User::select('id','slug','nombre','apellido','email','tipo_usuario_id','empresa_id','status');
         $arrData = $arrData->skip($start)->take($rowPerPage);
         $arrData = $arrData->orderBy($columnName,$columnSortOrder);
         if (!empty($searchValue)) {
@@ -53,8 +60,10 @@ class UsersController extends Controller
             $arrData = $arrData->orWhere('apellido','like','%'.$searchValue.'%');
             $arrData = $arrData->orWhere('email','like','%'.$searchValue.'%');
         }
+        if (\Auth::User()->tipo_usuario_id!=1) {
+            $arrData = $arrData->where('empresa_id',\Auth::User()->empresa->id);
+        }
         $arrData = $arrData->orderby('id','DESC')->get();
-
 
         $response =[];
         $response = array(
@@ -64,16 +73,33 @@ class UsersController extends Controller
             "data"              => [],
         );
         foreach($arrData as $key){
-            $acciones ='<button type="button" class="btn btn-primary dropdown-toggle btn-sm btn-block" data-toggle="dropdown">Acciones</button><div class="dropdown-menu"><a href="clients/'.$key->id.'" class="dropdown-item" title="Ver datos del cliente"><i class="fa fa-search"></i> Ver</a><a href="clients/'.$key->id.'/edit" class="dropdown-item" title="Editar datos del cliente"><i class="fa fa-pencil"></i> Editar</a><a href="javascript:void(0);" id="delete-compnay" onClick="deleteFunc('.$key->id.')" title="Delete" class="delete dropdown-item"><i class="fa fa-trash"></i> Eliminar</a></div>';
+            if ($key->status=="Activo") {
+                $status = '<span class="badge badge-success">'.$key->status.'</span>';
+            } else {
+                $status = '<span class="badge badge-danger">'.$key->status.'</span>';
+            }
+            
             $response['data'][] = [
-                "nombre"            => $key->nombre,
-                "apellido"          => $key->apellido,
+                "nombre"            => $key->nombre.' '.$key->apellido,
                 "email"             => $key->email,
-                "acciones"          => $acciones
+                "tipo_usuario_id"   => $key->tipo_usuario->nombre,
+                "empresa_id"        => empty($key->empresa->nombre)?'N/A':$key->empresa->nombre,
+                "status"            => $status,
+                "acciones"          => $this->accionesIndex($key->slug)
             ];
         }
 
         return response()->json($response);
+    }
+
+    public function accionesIndex($slug)
+    {
+        $acciones ='<button type="button" class="btn btn-primary dropdown-toggle btn-sm btn-block" data-toggle="dropdown">Acciones</button><div class="dropdown-menu">';
+        $acciones .= '<a href="users/'.$slug.'" class="dropdown-item" title="Ver datos del usuario"><i class="fa fa-search"></i> Ver</a>';
+        $acciones .= '<a href="users/'.$slug.'/edit" class="dropdown-item" title="Editar datos del usuario"><i class="fa fa-pencil"></i> Editar</a>';
+        $acciones .= '<a href="javascript:void(0);" data-mc="'.$slug.'" id="eliminarUsuario"  title="Eliminar usuario" class="dropdown-item"><i class="fa fa-trash"></i> Eliminar</a>';
+        $acciones .= '</div>';
+        return $acciones;
     }
 
     /**
@@ -84,7 +110,7 @@ class UsersController extends Controller
     public function create()
     {
         $tipoDocumentos = TipoDocumento::all();
-        $tipoUsuarios = TipoUsuario::all();
+        $tipoUsuarios = TipoUsuario::whereIn('nombre',['Administrador','Secretario(a)'])->get();
         return view('users.create',[
             'user'              => new User,
         ], compact('tipoDocumentos','tipoUsuarios'));
@@ -107,9 +133,9 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(User $user)
     {
-        //
+        return view('users.show', compact('user'));
     }
 
     /**
@@ -141,8 +167,9 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        //
+        $user->delete();
+        return response()->json(['mensaje'=>"Usuario eliminado con éxito.",'icono'=>'success']);
     }
 }

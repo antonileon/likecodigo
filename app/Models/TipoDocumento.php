@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
+use App\Models\Persona;
 
 class TipoDocumento extends Model
 {
@@ -28,5 +29,10 @@ class TipoDocumento extends Model
     public function getRouteKeyName()
     {
         return 'slug';
+    }
+
+    public function persona()
+    {
+        return $this->hasMany(Persona::class);
     }
 }

@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('numero_identificacion',255);
             $table->string('email',255);
             $table->string('telefono',255);
+            $table->enum('status',['Activo','Inactivo'])->default('Activo');
             $table->timestamps();
         });
     }

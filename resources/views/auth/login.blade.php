@@ -10,7 +10,7 @@
         <div class="py-30 text-center">
           <a class="link-effect font-w700" href="index.html">
             <i class="si si-fire"></i>
-            <span class="font-size-xl text-primary-dark">Like</span><span class="font-size-xl">Dental</span>
+            <span class="font-size-xl text-primary-dark">Like</span><span class="font-size-xl">Código</span>
           </a>
           <h1 class="h4 font-w700 mt-30 mb-10">Bienvenido a tu tablero</h1>
           <h2 class="h5 font-w400 text-muted mb-0">¡Es un gran día hoy!</h2>

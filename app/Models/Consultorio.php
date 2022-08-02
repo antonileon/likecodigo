@@ -35,6 +35,6 @@ class Consultorio extends Model
 
     public function empresas()
     {
-        return $this->belongsTo(Empresa::class)->withDefault();
+        return $this->belongsTo(Empresa::class,'empresa_id')->withDefault();
     }
 }

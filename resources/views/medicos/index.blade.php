@@ -1,7 +1,6 @@
 @extends('layouts.app')
-@section('title', __('Usuarios'))
+@section('title', __('Médicos'))
 @section('css')
-  <!-- Page JS Plugins CSS -->
   <link rel="stylesheet" href="{{ asset('js/plugins/datatables/dataTables.bootstrap4.css') }}">
 @endsection
 
@@ -9,24 +8,23 @@
   <!-- Page Content -->
   <div class="content">
     <nav class="breadcrumb bg-white push">
-      <a class="breadcrumb-item" href="javascript:void(0)">Usuarios</a>
+      <a class="breadcrumb-item" href="javascript:void(0)">Médicos</a>
       <span class="breadcrumb-item active">Listado</span>
     </nav>
     <!-- Dynamic Table Full -->
     <div class="block">
       <div class="block-header block-header-default">
-        <h3 class="block-title"><i class="fa fa-users"></i> Usuarios</h3>
-        <a href="{{ route('users.create') }}" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i> Registrar</a>
+        <h3 class="block-title"><i class="fa fa-building"></i> Médicos</h3>
+        <a href="{{ route('medicos.create') }}" class="btn btn-primary btn-sm" title="Registrar empresa"><i class="fa fa-edit"></i> Registrar</a>
       </div>
       <div class="block-content block-content-full">
-        <table class="table table-bordered table-striped table-vcenter js-dataTable-full table-sm" id="usersTable">
+        <table class="table table-bordered table-striped table-vcenter js-dataTable-full table-sm" id="medicosTable">
           <thead>
             <tr>
-              <th>Nombres</th>
-              <th style="width: 15%;">Email</th>
-              <th>Tipo de usuario</th>
-              <th>Empresa</th>
-              <th>Status</th>
+              <th>Nombre</th>
+              <th class="d-none d-sm-table-cell">Número de identificación</th>
+              <th>teléfono</th>
+              <th>Email</th>
               <th>Acciones</th>
             </tr>
           </thead>
@@ -34,44 +32,42 @@
         </table>
       </div>
     </div>
-    <!-- END Dynamic Table Full -->
   </div>
 @endsection
 @section('scripts')
   <script type="text/javascript">
     $(document).ready( function () {
-      $('#usersTable').DataTable({
+      $('#medicosTable').DataTable({
         oLanguage: {
           sProcessing  : "<i class='fa fa-spinner fa-spin'></i> Cargando registros...",
+          searchPlaceholder: "Buscar registro",
         },
         language: {
-          url: '//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json',
-          searchPlaceholder: "Buscar registro",
+          url: '//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json'
         },
         processing: true,
         serverSide: true,
         responsive: true,
         autoWidth:false,
-        ajax: "{{ url('users/get-index') }}",
+        ajax: "{{ url('medicos/get-index') }}",
         columns: [
           { data: 'nombre'},
+          { data: 'numero_identificacion'},
+          { data: 'telefono'},
           { data: 'email'},
-          { data: 'tipo_usuario_id'},
-          { data: 'empresa_id'},
-          { data: 'status'},
           { data: 'acciones'},
         ],
         order: [[0, 'desc']],
         columnDefs:[
-          {targets: [5], orderable: false},
+          {targets: [4], orderable: false},
         ]
       });
     });
-    //--CODIGO PARA ELIMINAR USUARIO------------------//
-    $('body').on('click', '#eliminarUsuario', function() {
+    //--CODIGO PARA ELIMINAR EMPRESA------------------//
+    $('body').on('click', '#eliminarMedico', function() {
       var id = $(this).data('mc');
       Swal.fire({
-        title: '¿Estás seguro que desea eliminar este usuario?',
+        title: '¿Estás seguro que desea eliminar este médico?',
         text: "¡Esta opción no podrá deshacerse en el futuro!",
         icon: 'warning',
         showCancelButton: true,
@@ -88,7 +84,7 @@
           });
           $.ajax({
             type:"DELETE",
-            url: "users/"+id+"",
+            url: "medicos/"+id+"",
             data: { id: id },
             dataType: 'json',
             success: function(data){
@@ -96,13 +92,13 @@
                 icon: data.icono,
                 title: data.mensaje
               })
-              var oTable = $('#usersTable').dataTable();
+              var oTable = $('#medicosTable').dataTable();
               oTable.fnDraw(false);
             },
             error: function (data) {
               Toast.fire({
                 icon: 'error',
-                title: 'Error del servidor, usuario no eliminado.'
+                title: 'Error del servidor, medico no eliminado.'
               })
             }
           });
@@ -113,5 +109,4 @@
   <!-- Page JS Plugins -->
   <script src="{{ asset('js/plugins/datatables/jquery.dataTables.min.js') }}"></script>
   <script src="{{ asset('js/plugins/datatables/dataTables.bootstrap4.min.js') }}"></script>
-  <!-- Page JS Code -->
 @endsection

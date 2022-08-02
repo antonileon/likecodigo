@@ -49,7 +49,7 @@ class EmpresaController extends Controller
 
         $users = \DB::table('empresas');
         $total = $users->count();
-        $totalFilter = Empresa::select('id','nombre','slug','numero_identificacion','email','telefono');
+        $totalFilter = Empresa::select('id','nombre','slug','numero_identificacion','email','telefono','status');
         if (!empty($searchValue)) {
             $totalFilter = $totalFilter->where('nombre','like','%'.$searchValue.'%');
             $totalFilter = $totalFilter->orWhere('numero_identificacion','like','%'.$searchValue.'%');
@@ -58,7 +58,7 @@ class EmpresaController extends Controller
         $totalFilter = $totalFilter->count();
 
 
-        $arrData =Empresa::select('id','nombre','slug','numero_identificacion','email','telefono');
+        $arrData = Empresa::select('id','nombre','slug','numero_identificacion','email','telefono','status');
         $arrData = $arrData->skip($start)->take($rowPerPage);
         $arrData = $arrData->orderBy($columnName,$columnSortOrder);
         if (!empty($searchValue)) {
@@ -77,12 +77,19 @@ class EmpresaController extends Controller
         );
         foreach($arrData as $key){
             $ver = '<a href="empresas/'.$key->slug.'" title="Ver datos de empresa">'.$key->nombre.'</a>';
+            if ($key->status=="Activo") {
+                $status = '<span class="badge badge-success">'.$key->status.'</span>';
+            } else {
+                $status = '<span class="badge badge-danger">'.$key->status.'</span>';
+            }
             $response['data'][] = [
                 "nombre"                    => $ver,
                 "numero_identificacion"     => $key->numero_identificacion,
                 "email"                     => $key->email,
                 "numero_consultorios"       => $key->consultorios->count(),
-                "acciones"                  => $this->accionesIndex($key->id)
+                "numero_usuarios"           => $key->usuarios->count(),
+                "status"                    => $status,
+                "acciones"                  => $this->accionesIndex($key->slug)
             ];
         }
 
@@ -100,7 +107,7 @@ class EmpresaController extends Controller
                 <a href="empresas/'.$slug.'/edit" class="dropdown-item" title="Editar datos de empresa">
                     <i class="fa fa-pencil"></i> Editar
                 </a>
-                <a href="javascript:void(0); onClick="deleteFunc('.$slug.')" title="Eliminar empresa" class="dropdown-item">
+                <a href="javascript:void(0);" data-mc="'.$slug.'" id="eliminarEmpresa" title="Eliminar empresa" class="dropdown-item">
                     <i class="fa fa-trash"></i> Eliminar
                 </a>
             </div>';
@@ -187,6 +194,7 @@ class EmpresaController extends Controller
      */
     public function destroy(Empresa $empresa)
     {
-        //
+        $empresa->delete();
+        return response()->json(['mensaje'=>"Empresa eliminada con éxito.",'icono'=>'success']);
     }
 }

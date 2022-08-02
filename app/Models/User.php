@@ -7,11 +7,16 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
+use App\Models\Empresa;
+use App\Models\TipoUsuario;
+use App\Models\Medico;
+use Spatie\Sluggable\HasSlug;
+use Spatie\Sluggable\SlugOptions;
 
 class User extends Authenticatable
 {
     use HasFactory, Notifiable;
-    use HasRoles;
+    use HasRoles, HasSlug;
 
     /**
      * The attributes that are mass assignable.
@@ -19,15 +24,15 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
+        'empresa_id',
         'tipo_usuario_id',
-        'tipo_documento_id',
         'nombre',
         'apellido',
         'nombre_usuario',
         'slug',
         'status',
         'email',
-        'password',
+        'password'
     ];
 
     /**
@@ -59,5 +64,20 @@ class User extends Authenticatable
     public function getRouteKeyName()
     {
         return 'slug';
+    }
+
+    public function empresa()
+    {
+        return $this->belongsTo(Empresa::class,'empresa_id')->withDefault();
+    }
+
+    public function tipo_usuario()
+    {
+        return $this->belongsTo(TipoUsuario::class,'tipo_usuario_id')->withDefault();
+    }
+    
+    public function medico()
+    {
+        return $this->hasOne(Medico::class);
     }
 }

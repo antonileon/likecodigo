@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Medico;
 
 class HomeController extends Controller
 {
@@ -23,6 +24,16 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $totalMedicos = Medico::select([
+            'medicos.id',
+            'users.empresa_id'
+        ])
+        ->join('users','users.id','=','medicos.user_id');
+        if (\Auth::User()->tipo_usuario_id!=1) {
+            $totalMedicos = $totalMedicos->where('users.empresa_id',\Auth::User()->empresa->id);
+        }
+        $totalMedicos = $totalMedicos->count();
+
+        return view('home', compact('totalMedicos'));
     }
 }

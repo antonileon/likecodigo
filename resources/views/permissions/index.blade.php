@@ -18,7 +18,7 @@
         <a href="{{ route('permissions.create') }}" class="btn btn-primary btn-sm" title="Registrar rol"><i class="fa fa-edit"></i> Registrar</a>
       </div>
       <div class="block-content block-content-full">
-        <table class="table table-bordered table-striped table-vcenter js-dataTable-full table-sm" id="rolesTable">
+        <table class="table table-bordered table-striped table-vcenter js-dataTable-full table-sm" id="permisosTable">
           <thead>
             <tr>
               <th>Descripción</th>
@@ -35,12 +35,13 @@
 @section('scripts')
   <script type="text/javascript">
     $(document).ready( function () {
-      $('#rolesTable').DataTable({
+      $('#permisosTable').DataTable({
         oLanguage: {
           sProcessing  : "<i class='fa fa-spinner fa-spin'></i> Cargando registros...",
         },
         language: {
-          url: '//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json'
+          url: '//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json',
+          searchPlaceholder: "Buscar registro",
         },
         processing: true,
         serverSide: true,
@@ -59,12 +60,11 @@
       });
     });
 
-    //--CODIGO PARA ELIMINAR PBX ---------------------//
-    $('body').on('click', '#eliminarRol', function() {
-      var id = $(this).data('id');
-      console.log(id);
+    //--CODIGO PARA ELIMINAR PERMISO------------------//
+    $('body').on('click', '#eliminarPermiso', function() {
+      var id = $(this).data('mc');
       Swal.fire({
-        title: '¿Estás seguro que desea eliminar este rol?',
+        title: '¿Estás seguro que desea eliminar este permiso?',
         text: "¡Esta opción no podrá deshacerse en el futuro!",
         icon: 'warning',
         showCancelButton: true,
@@ -74,18 +74,29 @@
         cancelButtonText: 'No, Cancelar!'
       }).then((result) => {
         if (result.isConfirmed) {
+          $.ajaxSetup({
+            headers: {
+              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+          });
           $.ajax({
             type:"DELETE",
-            url: "roles/"+id+"",
+            url: "permissions/"+id+"",
             data: { id: id },
             dataType: 'json',
-            success: function(response){
-              Swal.fire ( response.titulo ,  response.message ,  response.icono );
-              var oTable = $('#rolesTable').dataTable();
+            success: function(data){
+              Toast.fire({
+                icon: data.icono,
+                title: data.mensaje
+              })
+              var oTable = $('#permisosTable').dataTable();
               oTable.fnDraw(false);
             },
             error: function (data) {
-              Swal.fire({title: "Error del sistema", text:  "Rol no eliminada", icon:  "error"});
+              Toast.fire({
+                icon: 'error',
+                title: 'Error del servidor, rol no eliminado.'
+              })
             }
           });
         }

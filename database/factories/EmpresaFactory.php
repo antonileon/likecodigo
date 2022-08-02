@@ -22,11 +22,12 @@ class EmpresaFactory extends Factory
     {
         $nombre = $this->faker->unique()->userName;
         return [
-            'nombre'                        =>  $nombre,
-            'slug'                          =>  Str::slug($nombre, '-'),
-            'numero_identificacion'         =>  $this->faker->unique()->safeEmail,
-            'email'                         =>  $this->faker->unique()->safeEmail,
-            'telefono'                      =>  $this->faker->phoneNumber,
+            'nombre'                        => $nombre,
+            'slug'                          => Str::slug($nombre, '-'),
+            'numero_identificacion'         => $this->faker->unique()->safeEmail,
+            'email'                         => $this->faker->unique()->safeEmail,
+            'telefono'                      => $this->faker->phoneNumber,
+            'status'                        => 'Activo',
         ];
     }
 }

@@ -69,6 +69,10 @@
             </address>
           </div>
         </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-6">
         <div class="block block-rounded">
           <div class="block-header block-header-default">
             <h3 class="block-title">Listado de consultorios</h3>
@@ -84,27 +88,81 @@
                 </tr>
               </thead>
               <tbody>
-                @foreach($empresa->consultorios as $consultorio)
+                @if(count($empresa->consultorios)>0)
+                  @foreach($empresa->consultorios as $consultorio)
+                    <tr>
+                      <td>
+                        <a class="font-w600" href="{{ route('consultorios.show', $consultorio->slug) }}">{{ $consultorio->id }}</a>
+                      </td>
+                      <td>
+                        {{ $consultorio->nombre }}
+                      </td>
+                      <td class="d-none d-sm-table-cell">
+                        <a href="be_pages_ecom_customer.html">{{ $consultorio->telefono }}</a>
+                      </td>
+                      <td>
+                        <a class="btn btn-sm btn-warning btn-rounded mr-5 my-5" href="{{ route('consultorios.edit', $consultorio->slug) }}" title="Editar datos del consultorio">
+                          <i class="fa fa-pencil"></i>
+                        </a>
+                        <a class="btn btn-sm btn-danger btn-rounded mr-5 my-5" href="javascript:void(0)" title="Eliminar consultorio">
+                          <i class="fa fa-trash"></i>
+                        </a>
+                      </td> 
+                    </tr>
+                  @endforeach
+                @else
                   <tr>
-                    <td>
-                      <a class="font-w600" href="{{ route('consultorios.show', $consultorio->slug) }}">{{ $consultorio->id }}</a>
-                    </td>
-                    <td>
-                      {{ $consultorio->nombre }}
-                    </td>
-                    <td class="d-none d-sm-table-cell">
-                      <a href="be_pages_ecom_customer.html">{{ $consultorio->telefono }}</a>
-                    </td>
-                    <td>
-                      <a class="btn btn-sm btn-warning btn-rounded mr-5 my-5" href="{{ route('consultorios.edit', $consultorio->slug) }}" title="Editar datos del consultorio">
-                        <i class="fa fa-pencil"></i>
-                      </a>
-                      <a class="btn btn-sm btn-danger btn-rounded mr-5 my-5" href="javascript:void(0)" title="Eliminar consultorio">
-                        <i class="fa fa-trash"></i>
-                      </a>
-                    </td> 
+                    <td colspan="4" style="text-align: center;">Esta empresa no posee consultorios registrados.</td>
                   </tr>
-                @endforeach
+                @endif
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="block block-rounded">
+          <div class="block-header block-header-default">
+            <h3 class="block-title">Listado de usuarios</h3>
+          </div>
+          <div class="block-content">
+            <table class="table table-borderless table-striped">
+              <thead>
+                <tr>
+                  <th style="width: 100px;">ID</th>
+                  <th>Nombre</th>
+                  <th class="d-none d-sm-table-cell">Teléfono</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                @if(count($empresa->usuarios)>0)
+                  @foreach($empresa->usuarios as $usuario)
+                    <tr>
+                      <td>
+                        <a class="font-w600" href="{{ route('consultorios.show', $usuario->slug) }}">{{ $usuario->id }}</a>
+                      </td>
+                      <td>
+                        {{ $usuario->nombre }}
+                      </td>
+                      <td class="d-none d-sm-table-cell">
+                        <a href="be_pages_ecom_customer.html"></a>
+                      </td>
+                      <td>
+                        <a class="btn btn-sm btn-warning btn-rounded mr-5 my-5" href="{{ route('consultorios.edit', $usuario->slug) }}" title="Editar datos del consultorio">
+                          <i class="fa fa-pencil"></i>
+                        </a>
+                        <a class="btn btn-sm btn-danger btn-rounded mr-5 my-5" href="javascript:void(0)" title="Eliminar consultorio">
+                          <i class="fa fa-trash"></i>
+                        </a>
+                      </td> 
+                    </tr>
+                  @endforeach
+                @else
+                  <tr>
+                    <td colspan="4" style="text-align: center;">Esta empresa no posee usuarios registrados.</td>
+                  </tr>
+                @endif
               </tbody>
             </table>
           </div>

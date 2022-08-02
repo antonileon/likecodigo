@@ -40,6 +40,18 @@
         <div class="alert alert-danger">{{ $message }}</div>
       @enderror
     </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <label for="status">Status <b style="color:red;">*</b></label>
+        <select name="status" id="status" class="form-control">
+          <option value="Activo" {{ old('status' , $empresa->status)=='Activo'? 'selected' : '' }}>Activo</option>
+          <option value="Inactivo" {{ old('status' , $empresa->status)=='Inactivo'? 'selected' : '' }}>Inactivo</option>
+        </select>
+      </div>
+      @error('status')
+        <div class="alert alert-danger">{{ $message }}</div>
+      @enderror
+    </div>
   </div>
 </div>
 <hr>

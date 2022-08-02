@@ -79,13 +79,13 @@ class PermissionController extends Controller
         $acciones ='
             <button type="button" class="btn btn-primary dropdown-toggle btn-sm btn-block" data-toggle="dropdown">Acciones</button>
             <div class="dropdown-menu">
-                <a href="permissions/'.$id.'" class="dropdown-item" title="Ver rol">
+                <a href="permissions/'.$id.'" class="dropdown-item" title="Ver permiso">
                     <i class="fa fa-pencil"></i> Ver
                 </a>
-                <a href="permissions/'.$id.'/edit" class="dropdown-item" title="Editar rol">
+                <a href="permissions/'.$id.'/edit" class="dropdown-item" title="Editar permiso">
                     <i class="fa fa-pencil"></i> Editar
                 </a>
-                <a href="javascript:void(0); data-mc="'.$id.'" title="Eliminar rol" class="dropdown-item" id="eliminarRol">
+                <a href="javascript:void(0);" data-mc="'.$id.'" title="Eliminar permiso" class="dropdown-item" id="eliminarPermiso">
                     <i class="fa fa-trash"></i> Eliminar
                 </a>
             </div>';
@@ -146,7 +146,7 @@ class PermissionController extends Controller
      */
     public function update(Request $request, Permission $permission)
     {
-        $permission->update($request->only('description'));
+        $permission->update($request->only('name','description'));
         toast('Permiso '.strtoupper($request->description).' modificado con éxito.','success');
         return redirect()->route('permissions.index');
 
@@ -158,8 +158,9 @@ class PermissionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Permission $permission)
     {
-        //
+        $permission->delete();
+        return response()->json(['mensaje'=>"Permiso eliminado con éxito.",'icono'=>'success']);
     }
 }

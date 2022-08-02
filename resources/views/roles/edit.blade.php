@@ -1,8 +1,6 @@
 @extends('layouts.app')
 
 @section('css')
-  <!-- Page JS Plugins CSS -->
-  <link rel="stylesheet" href="{{ asset('js/plugins/datatables/dataTables.bootstrap4.css') }}">
 @endsection
 
 @section('content')
@@ -56,8 +54,6 @@
             </div>
           </div>
         </form>
-        {{-- {!! Form::model($role,['route'=>['roles.update',$role],'method'=>'put','autocomplete'=>'off']) !!}
-        {!! Form::close() !!} --}}
       </div>
     </div>
     <!-- END Dynamic Table Full -->

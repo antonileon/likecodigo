@@ -28,6 +28,7 @@ class StoreEmpresaRequest extends FormRequest
             'numero_identificacion'     => 'required',
             'email'                     => 'required|email|unique:empresas',
             'telefono'                  => 'required',
+            'status'                    => 'required',
         ];
     }
 
@@ -38,6 +39,7 @@ class StoreEmpresaRequest extends FormRequest
             'numero_identificacion'     => 'número de identificación',
             'email'                     => 'email',
             'telefono'                  => 'teléfono',
+            'status'                    => 'status',
         ];
     }
 
@@ -51,6 +53,7 @@ class StoreEmpresaRequest extends FormRequest
             'email.unique'                      => 'El email ya se encuentra registrado.',
             'email.email'                       => 'Formato de email no permitido.',
             'telefono.required'                 => 'El teléfono es obligatorio.',
+            'status.required'                   => 'El status es obligatorio.',
         ];
     }
 }

@@ -7,9 +7,17 @@ use App\Models\Consultorio;
 use App\Http\Requests\StoreConsultorioRequest;
 use App\Http\Requests\UpdateConsultorioRequest;
 use App\Models\Empresa;
+use App\Models\User;
 
 class ConsultorioController extends Controller
 {
+    protected $idEmpresa;
+
+    public function __construct()
+    {
+        //$this->idEmpresa = ;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -17,6 +25,7 @@ class ConsultorioController extends Controller
      */
     public function index()
     {
+        //dd('');
         return view('consultorios.index');
     }
 
@@ -38,12 +47,20 @@ class ConsultorioController extends Controller
         $columnSortOrder    =       $orderArray[0]['dir']; // This will get us order direction(ASC/DESC)
         $searchValue        =       $searchArray['value']; // This is search value 
 
-        $users = \DB::table('consultorios');
-        $total = $users->count();
+        if (\Auth::User()->tipo_usuario_id!=1) {
+            $consultorios = Consultorio::select('empresa_id')
+            ->where('empresa_id',\Auth::User()->empresa->id);
+        } else {
+            $consultorios = Consultorio::all();
+        }
+        $total = $consultorios->count();
         $totalFilter = Consultorio::select('id','nombre','slug','telefono');
         if (!empty($searchValue)) {
             $totalFilter = $totalFilter->where('nombre','like','%'.$searchValue.'%');
             $totalFilter = $totalFilter->orWhere('telefono','like','%'.$searchValue.'%');
+        }
+        if (\Auth::User()->tipo_usuario_id!=1) {
+            $totalFilter = $totalFilter->where('empresa_id',\Auth::User()->empresa->id);
         }
         $totalFilter = $totalFilter->count();
 
@@ -54,6 +71,9 @@ class ConsultorioController extends Controller
         if (!empty($searchValue)) {
             $arrData = $arrData->where('nombre','like','%'.$searchValue.'%');
             $arrData = $arrData->orWhere('telefono','like','%'.$searchValue.'%');
+        }
+        if (\Auth::User()->tipo_usuario_id!=1) {
+            $arrData = $arrData->where('empresa_id',\Auth::User()->empresa->id);
         }
         $arrData = $arrData->get();
 
@@ -75,7 +95,7 @@ class ConsultorioController extends Controller
                     <a href="consultorios/'.$key->slug.'/edit" class="dropdown-item" title="Editar datos del consultorio">
                         <i class="fa fa-pencil"></i> Editar
                     </a>
-                    <a href="javascript:void(0); onClick="deleteFunc('.$key->id.')" title="Eliminar consultorio" class="dropdown-item">
+                    <a href="javascript:void(0);" data-mc="'.$key->slug.'" id="eliminarConsultorio" title="Eliminar consultorio" class="dropdown-item">
                         <i class="fa fa-trash"></i> Eliminar
                     </a>
                 </div>';
@@ -171,7 +191,8 @@ class ConsultorioController extends Controller
      */
     public function destroy(Consultorio $consultorio)
     {
-        //
+        $consultorio->delete();
+        return response()->json(['mensaje'=>"Consultorio eliminado con éxito.",'icono'=>'success']);
     }
 
     public function buscarEmpresas(Request $request)

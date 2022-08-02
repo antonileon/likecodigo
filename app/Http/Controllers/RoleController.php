@@ -82,7 +82,7 @@ class RoleController extends Controller
                 <a href="roles/'.$id.'/edit" class="dropdown-item" title="Editar rol">
                     <i class="fa fa-pencil"></i> Editar
                 </a>
-                <a href="javascript:void(0); data-mc="'.$id.'" title="Eliminar rol" class="dropdown-item" id="eliminarRol">
+                <a href="javascript:void(0);" data-mc="'.$id.'" title="Eliminar rol" class="dropdown-item" id="eliminarRol">
                     <i class="fa fa-trash"></i> Eliminar
                 </a>
             </div>';
@@ -158,7 +158,7 @@ class RoleController extends Controller
      */
     public function update(Request $request, Role $role)
     {
-        $role->update($request->only('description'));
+        $role->update($request->only('name'));
 
         // $role->permissions()->sync($request->input('permissions', []));
         $role->syncPermissions($request->input('permissions', []));
@@ -174,8 +174,7 @@ class RoleController extends Controller
      */
     public function destroy(Role $role)
     {
-        dd($role);
         $role->delete();
-        return response()->json(['message'=>"Rol eliminado con éxito.",'icono'=>'warning','titulo'=>'Error']);
+        return response()->json(['mensaje'=>"Rol eliminado con éxito.",'icono'=>'success']);
     }
 }
