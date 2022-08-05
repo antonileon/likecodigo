@@ -47,6 +47,7 @@ Route::group(['middleware' => ['web', 'auth']], function() {
     ########------------------------MEDICOS------------------------------------------------------########
     Route::get('/medicos/get-index',[MedicoController::class, 'getIndex']);
     #########------------------------PACIENTES---------------------------------------------------########
+    Route::get('/pacientes/get-index',[PacienteController::class, 'getIndex']);
     #########------------------------Resources---------------------------------------------------########
     Route::resources([
         'users'             => UsersController::class,

@@ -78,9 +78,9 @@ class EmpresaController extends Controller
         foreach($arrData as $key){
             $ver = '<a href="empresas/'.$key->slug.'" title="Ver datos de empresa">'.$key->nombre.'</a>';
             if ($key->status=="Activo") {
-                $status = '<span class="badge badge-success">'.$key->status.'</span>';
+                $status = '<span class="badge bg-success"><i class="fa fa-check me-1"></i>'.$key->status.'</span>';
             } else {
-                $status = '<span class="badge badge-danger">'.$key->status.'</span>';
+                $status = '<span class="badge bg-danger"><i class="fa fa-times-circle me-1"></i>'.$key->status.'</span>';
             }
             $response['data'][] = [
                 "nombre"                    => $ver,
@@ -99,7 +99,9 @@ class EmpresaController extends Controller
     public function accionesIndex($slug)
     {
         $acciones ='
-            <button type="button" class="btn btn-primary dropdown-toggle btn-sm btn-block" data-toggle="dropdown">Acciones</button>
+            <button type="button" class="btn btn-sm btn-primary btn-block" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-haspopup="true" aria-expanded="false">
+                Acciones <i class="fa fa-angle-down opacity-50 ms-1"></i>
+            </button>
             <div class="dropdown-menu">
                 <a href="empresas/'.$slug.'" class="dropdown-item" title="Ver datos de empresa">
                     <i class="fa fa-search"></i> Ver

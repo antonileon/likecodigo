@@ -61,7 +61,7 @@ class RoleController extends Controller
             "data" => [],
         );
         foreach($arrData as $key){
-            $ver = '<a href="roles/'.$key->id.'" title="Ver datos de empresa">'.$key->name.'</a>';
+            $ver = '<a href="roles/'.$key->id.'" title="Ver permisos de este rol">'.$key->name.'</a>';
             $response['data'][] = [
                 "name"                      => $ver,
                 "acciones"                  => $this->accionesIndex($key->id)
@@ -74,7 +74,9 @@ class RoleController extends Controller
     public function accionesIndex($id)
     {
         $acciones ='
-            <button type="button" class="btn btn-primary dropdown-toggle btn-sm btn-block" data-toggle="dropdown">Acciones</button>
+            <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-haspopup="true" aria-expanded="false">
+                Acciones <i class="fa fa-angle-down opacity-50 ms-1"></i>
+            </button>
             <div class="dropdown-menu">
                 <a href="roles/'.$id.'" class="dropdown-item" title="Ver rol">
                     <i class="fa fa-search"></i> Ver

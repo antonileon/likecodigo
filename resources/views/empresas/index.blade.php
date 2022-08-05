@@ -1,37 +1,36 @@
 @extends('layouts.app')
 @section('title', __('Empresas'))
 @section('css')
-  <link rel="stylesheet" href="{{ asset('js/plugins/datatables/dataTables.bootstrap4.css') }}">
 @endsection
 
 @section('content')
-  <!-- Page Content -->
   <div class="content">
-    <nav class="breadcrumb bg-white push">
+    <nav class="breadcrumb push bg-body-extra-light rounded-pill px-4 py-2">
       <a class="breadcrumb-item" href="javascript:void(0)">Empresas</a>
       <span class="breadcrumb-item active">Listado</span>
     </nav>
-    <!-- Dynamic Table Full -->
-    <div class="block">
+    <div class="block block-rounded">
       <div class="block-header block-header-default">
         <h3 class="block-title"><i class="fa fa-building"></i> Empresas</h3>
         <a href="{{ route('empresas.create') }}" class="btn btn-primary btn-sm" title="Registrar empresa"><i class="fa fa-edit"></i> Registrar</a>
       </div>
       <div class="block-content block-content-full">
-        <table class="table table-bordered table-striped table-vcenter js-dataTable-full table-sm" id="empresasTable">
-          <thead>
-            <tr>
-              <th>Nombre</th>
-              <th class="d-none d-sm-table-cell" style="width: 15%;">Nro. de identificación</th>
-              <th style="width: 15%;">Email</th>
-              <th>Nro. consultorios</th>
-              <th>Nro. usuarios</th>
-              <th style="text-align: center;">Status</th>
-              <th>Acciones</th>
-            </tr>
-          </thead>
-          <tbody></tbody>
-        </table>
+        <div class="table-responsive">
+        </div>
+          <table class="table table-bordered table-striped table-vcenter js-dataTable-responsive table-sm" id="empresasTable" style="font-size: 12px;">
+            <thead>
+              <tr>
+                <th>Nombre</th>
+                <th>N° de identificación</th>
+                <th>Email</th>
+                <th>N° consultorios</th>
+                <th>N° usuarios</th>
+                <th>Status</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
       </div>
     </div>
   </div>
@@ -40,10 +39,8 @@
   <script type="text/javascript">
     $(document).ready( function () {
       $('#empresasTable').DataTable({
-        oLanguage: {
-          sProcessing  : "<i class='fa fa-spinner fa-spin'></i> Cargando registros...",
-        },
         language: {
+          sProcessing  : "Cargando registros...",
           url: '//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json',
           searchPlaceholder: "Buscar registro",
         },
@@ -113,7 +110,4 @@
       })
     });
   </script>
-  <!-- Page JS Plugins -->
-  <script src="{{ asset('js/plugins/datatables/jquery.dataTables.min.js') }}"></script>
-  <script src="{{ asset('js/plugins/datatables/dataTables.bootstrap4.min.js') }}"></script>
 @endsection

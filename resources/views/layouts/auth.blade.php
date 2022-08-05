@@ -29,9 +29,6 @@
     <!-- Fonts and Codebase framework -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Muli:300,400,400i,600,700">
     <link rel="stylesheet" id="css-main" href="{!! asset('css/codebase.css') !!}">
-
-    <!-- You can include a specific file from css/themes/ folder to alter the default color theme of the template. eg: -->
-    <!-- <link rel="stylesheet" id="css-theme" href="assets/css/themes/flat.min.css"> -->
     <!-- END Stylesheets -->
 </head>
 <body>
@@ -42,35 +39,10 @@
             @yield('content')           
         </main>
     </div>
-    <!--
-        Codebase JS Core
-
-        Vital libraries and plugins used in all pages. You can choose to not include this file if you would like
-        to handle those dependencies through webpack. Please check out assets/_es6/main/bootstrap.js for more info.
-
-        If you like, you could also include them separately directly from the assets/js/core folder in the following
-        order. That can come in handy if you would like to include a few of them (eg jQuery) from a CDN.
-
-        assets/js/core/jquery.min.js
-        assets/js/core/bootstrap.bundle.min.js
-        assets/js/core/simplebar.min.js
-        assets/js/core/jquery-scrollLock.min.js
-        assets/js/core/jquery.appear.min.js
-        assets/js/core/jquery.countTo.min.js
-        assets/js/core/js.cookie.min.js
-    -->
-
-    <!--
-        Codebase JS
-
-        Custom functionality including Blocks/Layout API as well as other vital and optional helpers
-        webpack is putting everything together at assets/_es6/main/app.js
-    -->
+    <script src="{{ asset('js/lib/jquery.min.js') }}"></script>
     <script src="{!! asset('js/codebase.app.js') !!}"></script>
-
     <!-- Page JS Plugins -->
     <script src="{!! asset('js/plugins/jquery-validation/jquery.validate.min.js') !!}"></script>
-
     <!-- Page JS Code -->
     <script src="{!! asset('js/pages/op_auth_signin.min.js') !!}"></script>
 </body>

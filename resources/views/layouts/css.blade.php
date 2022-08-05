@@ -19,11 +19,11 @@
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,400i,600,700">
 	<link rel="stylesheet" id="css-main" href="{{ asset('/css/codebase.css') }}">
 
-	<link rel="stylesheet" id="css-main" href="{{ asset('js/plugins/sweetalert2/sweetalert2.min.css') }}">
+	<link rel="stylesheet" href="{{ asset('js/plugins/sweetalert2/sweetalert2.min.css') }}">
 	@yield('css')
 	<!-- Select2 -->
 	<link rel="stylesheet" href="{{  asset('js/plugins/select2/css/select2.min.css') }}">
-	<!-- Scripts -->
-	<script>
-	window.Laravel = {!! json_encode(['csrfToken' => csrf_token()]) !!};
-	</script>
+	<!-- Datatables CSS Plugins -->
+	<link rel="stylesheet" href="{{ asset('js/plugins/datatables/datatables-bs5/css/dataTables.bootstrap5.min.css') }}">
+	<link rel="stylesheet" href="{{ asset('js/plugins/datatables/datatables-buttons-bs5/css/buttons.bootstrap5.min.css') }}">
+	<link rel="stylesheet" href="{{ asset('js/plugins/datatables/datatables-responsive-bs5/css/responsive.bootstrap5.min.css') }}">

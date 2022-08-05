@@ -1,123 +1,302 @@
-<!-- Side Overlay-->
 <aside id="side-overlay">
-  <!-- Side Header -->
-  <div class="content-header content-header-fullrow bg-primary-dark">
-    <div class="content-header-section align-parent">
-      <!-- Close Side Overlay -->
-      <!-- Layout API, functionality initialized in Template._uiApiLayout() -->
-      <button type="button" class="btn btn-circle btn-dual-secondary align-v-r" data-toggle="layout" data-action="side_overlay_close">
-        <i class="fa fa-times text-danger"></i>
-      </button>
-      <!-- END Close Side Overlay -->
+  
+  <div class="content-header">
+    
+    <a class="img-link me-2" href="https://demo.pixelcave.com/codebase/be_pages_generic_profile.html">
+      <img class="img-avatar img-avatar32" src="{{ asset('media/various/little-face.png') }}" alt="">
+    </a>
+    
 
-      <!-- User Info -->
-      <div class="content-header-item">
-        <a class="img-link mr-5" href="javascript:void(0)">
-          <img class="img-avatar img-avatar32" src="{{ asset('media/various/little-face.png') }}" alt="">
-        </a>
-        <a class="align-middle link-effect text-white-op font-w600" href="javascript:void(0)">{!! substr(\Auth::User()->nombres,0,1) !!}. {!!\Auth::User()->apellidos!!}</a>
-      </div>
-      <!-- END User Info -->
-    </div>
+    
+    <a class="link-fx text-body-color-dark fw-semibold fs-sm" href="https://demo.pixelcave.com/codebase/be_pages_generic_profile.html">
+      John Smith
+    </a>
+    
+
+    
+    
+    <button type="button" class="btn btn-sm btn-alt-danger ms-auto" data-toggle="layout" data-action="side_overlay_close">
+      <i class="fa fa-fw fa-times"></i>
+    </button>
+    
   </div>
-  <!-- END Side Header -->
+  
 
-  <!-- Side Content -->
-  <!-- Emergency Notification -->
-  <div class="content-side content-side-full bg-danger-light text-center">
-    <i class="fa fa-exclamation-triangle fa-2x text-danger animated swing infinite"></i>
-    <p class="font-size-h5 font-w700 text-danger mt-10 mb-0">
-      There is an emergency, please proceed to surgery immediately!
-    </p>
-  </div>
-  <!-- END Emergency Notification -->
-
-  <!-- Side Content -->
+  
   <div class="content-side">
-    <!-- Mini Stats -->
-    <div class="block pull-r-l">
+    
+    <div class="block pull-t pull-x">
+      <div class="block-content block-content-full block-content-sm bg-body-light">
+        <form action="https://demo.pixelcave.com/codebase/be_pages_generic_search.html" method="POST">
+          <div class="input-group">
+            <input type="text" class="form-control" id="side-overlay-search" name="side-overlay-search" placeholder="Search..">
+            <button type="submit" class="btn btn-secondary">
+              <i class="fa fa-search"></i>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+    
+
+    
+    <div class="block pull-x">
       <div class="block-content block-content-full block-content-sm bg-body-light">
         <div class="row text-center">
-          <div class="col-6">
-            <div class="font-size-sm font-w600 text-uppercase text-muted">Patients</div>
-            <a class="link-effect font-w600 font-size-h4" href="javascript:void(0)">5</a>
+          <div class="col-4">
+            <div class="fs-sm fw-semibold text-uppercase text-muted">Clients</div>
+            <div class="fs-4">460</div>
           </div>
-          <div class="col-6">
-            <div class="font-size-sm font-w600 text-uppercase text-muted">Appointments</div>
-            <a class="link-effect font-w600 font-size-h4" href="javascript:void(0)">6</a>
+          <div class="col-4">
+            <div class="fs-sm fw-semibold text-uppercase text-muted">Sales</div>
+            <div class="fs-4">728</div>
+          </div>
+          <div class="col-4">
+            <div class="fs-sm fw-semibold text-uppercase text-muted">Earnings</div>
+            <div class="fs-4">$7,860</div>
           </div>
         </div>
       </div>
     </div>
-    <!-- END Mini Stats -->
+    
 
-    <!-- Notifications -->
-    <div class="block pull-r-l">
+    
+    <div class="block pull-x">
       <div class="block-header bg-body-light">
-        <h3 class="block-title">Recent Notifications</h3>
+        <h3 class="block-title">
+          <i class="fa fa-fw fa-users opacity-50 me-1"></i> Friends
+        </h3>
         <div class="block-options">
           <button type="button" class="btn-block-option" data-toggle="block-option" data-action="state_toggle" data-action-mode="demo">
             <i class="si si-refresh"></i>
           </button>
+          <button type="button" class="btn-block-option" data-toggle="block-option" data-action="content_toggle"></button>
         </div>
       </div>
       <div class="block-content">
-        <ul class="list list-activity">
+        <ul class="nav-users">
           <li>
-            <i class="fa fa-exclamation-triangle text-danger"></i>
-            <div class="font-w600">There is an emergency!</div>
-            <div>
-              <a class="font-w600 text-danger" href="javascript:void(0)">Event Details</a>
-            </div>
-            <div class="font-size-xs text-muted">just now</div>
+            <a href="https://demo.pixelcave.com/codebase/be_pages_generic_profile.html">
+              <img class="img-avatar" src="{{ asset('media/various/little-face.png') }}" alt="">
+              <i class="fa fa-circle text-success"></i>
+              <div>Helen Jacobs</div>
+              <div class="fw-normal fs-xs text-muted">Photographer</div>
+            </a>
           </li>
           <li>
-            <i class="fa fa-check text-success"></i>
-            <div class="font-w600">New patient was added successfully</div>
-            <div>
-              <a class="font-w600 text-success" href="javascript:void(0)">Carol White</a>
-            </div>
-            <div class="font-size-xs text-muted">15 min ago</div>
+            <a href="https://demo.pixelcave.com/codebase/be_pages_generic_profile.html">
+              <img class="img-avatar" src="{{ asset('media/various/little-face.png') }}" alt="">
+              <i class="fa fa-circle text-success"></i>
+              <div>Carl Wells</div>
+              <div class="fw-normal fs-xs text-muted">Web Designer</div>
+            </a>
           </li>
           <li>
-            <i class="fa fa-pencil text-info"></i>
-            <div class="font-w600">You edited a file</div>
-            <div>
-              <a class="font-w600 text-info" href="javascript:void(0)">
-                <i class="fa fa-file-text-o"></i> Prescription#2.doc
-              </a>
-            </div>
-            <div class="font-size-xs text-muted">1 day ago</div>
+            <a href="https://demo.pixelcave.com/codebase/be_pages_generic_profile.html">
+              <img class="img-avatar" src="{{ asset('media/various/little-face.png') }}" alt="">
+              <i class="fa fa-circle text-warning"></i>
+              <div>Lori Grant</div>
+              <div class="fw-normal fs-xs text-muted">UI Designer</div>
+            </a>
           </li>
           <li>
-            <i class="fa fa-paypal text-primary"></i>
-            <div class="font-w600">New payment received!</div>
-            <div>
-              From <a class="font-w600" href="javascript:void(0)">Jose Mills</a>
-            </div>
-            <div class="font-size-xs text-muted">1 day ago</div>
-          </li>
-          <li>
-            <i class="fa fa-check text-success"></i>
-            <div class="font-w600">New appointment was scheduled successfully</div>
-            <div>
-              Tomorrow with <a class="font-w600 text-success" href="javascript:void(0)">Jose Parker</a>
-            </div>
-            <div class="font-size-xs text-muted">2 days ago</div>
+            <a href="https://demo.pixelcave.com/codebase/be_pages_generic_profile.html">
+              <img class="img-avatar" src="{{ asset('media/various/little-face.png') }}" alt="">
+              <div>Scott Young</div>
+              <div class="fw-normal fs-xs text-muted">Copywriter</div>
+            </a>
           </li>
         </ul>
-        <a class="btn btn-block btn-alt-secondary" href="javascript:void(0)">
-          Load more..
-        </a>
-        <a class="btn btn-block btn-hero btn-alt-primary" href="javascript:void(0)">
-          <i class="fa fa-flag mr-5"></i>
-          View All Notifications
-        </a>
       </div>
     </div>
-    <!-- END Notifications -->
+    
+
+    
+    <div class="block pull-x">
+      <div class="block-header bg-body-light">
+        <h3 class="block-title">
+          <i class="far fa-fw fa-clock opacity-50 me-1"></i> Activity
+        </h3>
+        <div class="block-options">
+          <button type="button" class="btn-block-option" data-toggle="block-option" data-action="state_toggle" data-action-mode="demo">
+            <i class="si si-refresh"></i>
+          </button>
+          <button type="button" class="btn-block-option" data-toggle="block-option" data-action="content_toggle"></button>
+        </div>
+      </div>
+      <div class="block-content">
+        <ul class="list list-activity mb-0">
+          <li>
+            <i class="si si-wallet text-success"></i>
+            <div class="fs-sm fw-semibold">+$29 New sale</div>
+            <div class="fs-sm">
+              <a href="javascript:void(0)">Admin Template</a>
+            </div>
+            <div class="fs-xs text-muted">5 min ago</div>
+          </li>
+          <li>
+            <i class="si si-close text-danger"></i>
+            <div class="fs-sm fw-semibold">Project removed</div>
+            <div class="fs-sm">
+              <a href="javascript:void(0)">Best Icon Set</a>
+            </div>
+            <div class="fs-xs text-muted">26 min ago</div>
+          </li>
+          <li>
+            <i class="si si-pencil text-info"></i>
+            <div class="fs-sm fw-semibold">You edited the file</div>
+            <div class="fs-sm">
+              <a href="javascript:void(0)">
+                <i class="fa fa-file-alt"></i> Docs.doc
+              </a>
+            </div>
+            <div class="fs-xs text-muted">3 hours ago</div>
+          </li>
+          <li>
+            <i class="si si-plus text-success"></i>
+            <div class="fs-sm fw-semibold">New user</div>
+            <div class="fs-sm">
+              <a href="javascript:void(0)">StudioWeb - View Profile</a>
+            </div>
+            <div class="fs-xs text-muted">5 hours ago</div>
+          </li>
+          <li>
+            <i class="si si-wrench text-warning"></i>
+            <div class="fs-sm fw-semibold">App v5.5 is available</div>
+            <div class="fs-sm">
+              <a href="javascript:void(0)">Update now</a>
+            </div>
+            <div class="fs-xs text-muted">8 hours ago</div>
+          </li>
+          <li>
+            <i class="si si-user-follow text-pulse"></i>
+            <div class="fs-sm fw-semibold">+1 Friend Request</div>
+            <div class="fs-sm">
+              <a href="javascript:void(0)">Accept</a>
+            </div>
+            <div class="fs-xs text-muted">1 day ago</div>
+          </li>
+        </ul>
+      </div>
+    </div>
+    
+
+    
+    <div class="block pull-x">
+      <div class="block-header bg-body-light">
+        <h3 class="block-title">
+          <i class="fa fa-fw fa-pencil-alt opacity-50 me-1"></i> Profile
+        </h3>
+        <div class="block-options">
+          <button type="button" class="btn-block-option" data-toggle="block-option" data-action="content_toggle"></button>
+        </div>
+      </div>
+      <div class="block-content block-content-full">
+        <form action="https://demo.pixelcave.com/codebase/be_pages_dashboard.html" method="POST" onsubmit="return false;">
+          <div class="mb-3">
+            <label class="form-label" for="side-overlay-profile-name">Name</label>
+            <div class="input-group">
+              <input type="text" class="form-control" id="side-overlay-profile-name" name="side-overlay-profile-name" placeholder="Your name.." value="John Smith">
+              <span class="input-group-text">
+                <i class="fa fa-user"></i>
+              </span>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label class="form-label" for="side-overlay-profile-email">Email</label>
+            <div class="input-group">
+              <input type="email" class="form-control" id="side-overlay-profile-email" name="side-overlay-profile-email" placeholder="Your email.." value="john.smith@example.com">
+              <span class="input-group-text">
+                <i class="fa fa-envelope"></i>
+              </span>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label class="form-label" for="side-overlay-profile-password">New Password</label>
+            <div class="input-group">
+              <input type="password" class="form-control" id="side-overlay-profile-password" name="side-overlay-profile-password" placeholder="New Password..">
+              <span class="input-group-text">
+                <i class="fa fa-asterisk"></i>
+              </span>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label class="form-label" for="side-overlay-profile-password-confirm">Confirm New Password</label>
+            <div class="input-group">
+              <input type="password" class="form-control" id="side-overlay-profile-password-confirm" name="side-overlay-profile-password-confirm" placeholder="Confirm New Password..">
+              <span class="input-group-text">
+                <i class="fa fa-asterisk"></i>
+              </span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6">
+              <button type="submit" class="btn btn-alt-primary">
+                <i class="fa fa-sync opacity-50 me-1"></i> Update
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    
+
+    
+    <div class="block pull-x">
+      <div class="block-header bg-body-light">
+        <h3 class="block-title">
+          <i class="fa fa-fw fa-wrench opacity-50 me-1"></i> Settings
+        </h3>
+        <div class="block-options">
+          <button type="button" class="btn-block-option" data-toggle="block-option" data-action="content_toggle"></button>
+        </div>
+      </div>
+      <div class="block-content block-content-full">
+        <div class="mb-4">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="side-overlay-settings-security-status" name="side-overlay-settings-security-status" checked>
+            <label class="form-check-label fw-medium" for="side-overlay-settings-security-status">Online Status</label>
+            <div class="fs-sm text-muted">Show your status to all</div>
+          </div>
+        </div>
+        <div class="mb-4">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="side-overlay-settings-security-verify" name="side-overlay-settings-security-verify">
+            <label class="form-check-label fw-medium" for="side-overlay-settings-security-verify">Verify on Login</label>
+            <div class="fs-sm text-muted">Most secure option</div>
+          </div>
+        </div>
+        <div class="mb-4">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="side-overlay-settings-security-updates" name="side-overlay-settings-security-updates" checked>
+            <label class="form-check-label fw-medium" for="side-overlay-settings-security-updates">Auto Updates</label>
+            <div class="fs-sm text-muted">Keep app updated</div>
+          </div>
+        </div>
+        <div class="mb-4">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="side-overlay-settings-security-notifications" name="side-overlay-settings-security-notifications" checked>
+            <label class="form-check-label fw-medium" for="side-overlay-settings-security-notifications">Notifications</label>
+            <div class="fs-sm text-muted">For every transaction</div>
+          </div>
+        </div>
+        <div class="mb-4">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="side-overlay-settings-security-api" name="side-overlay-settings-security-api" checked>
+            <label class="form-check-label fw-medium" for="side-overlay-settings-security-api">API Access</label>
+            <div class="fs-sm text-muted">Enable access from third party apps</div>
+          </div>
+        </div>
+        <div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="side-overlay-settings-security-2fa" name="side-overlay-settings-security-2fa">
+            <label class="form-check-label fw-medium" for="side-overlay-settings-security-2fa">Two Factor Auth</label>
+            <div class="fs-sm text-muted">Using an authenticator</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
   </div>
-  <!-- END Side Content -->
-  <!-- END Side Content -->
+  
 </aside>
-<!-- END Side Overlay -->

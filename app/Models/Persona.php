@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
+use App\Models\Paciente;
+use App\Models\Medico;
 
 class Persona extends Model
 {
@@ -27,6 +29,11 @@ class Persona extends Model
     public function medico()
     {
         return $this->hasOne(Medico::class);
+    }
+
+    public function paciente()
+    {
+        return $this->hasOne(Paciente::class);
     }
 
     public function tipo_documento()

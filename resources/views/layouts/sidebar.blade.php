@@ -1,131 +1,110 @@
-<nav id="sidebar">
-  <!-- Sidebar Content -->
-  <div class="sidebar-content">
-    <!-- Side Header -->
-    <div class="content-header content-header-fullrow px-15">
-      <!-- Mini Mode -->
-      <div class="content-header-section sidebar-mini-visible-b">
-        <!-- Logo -->
-        <span class="content-header-item font-w700 font-size-xl float-left animated fadeIn">
-          <span class="text-dual-primary-dark">c</span><span class="text-primary">b</span>
+<nav id="sidebar">  
+  <div class="sidebar-content">    
+    <div class="content-header justify-content-lg-center">      
+      <div>
+        <span class="smini-visible fw-bold tracking-wide fs-lg">
+          l<span class="text-primary">c</span>
         </span>
-        <!-- END Logo -->
+        <a class="link-fx fw-bold tracking-wide mx-auto" href="{{ route('home') }}">
+          <span class="smini-hidden">
+            <i class="fa fa-fire text-primary"></i>
+            <span class="fs-4 text-dual">Like</span><span class="fs-4 text-primary">Código</span>
+          </span>
+        </a>
       </div>
-      <!-- END Mini Mode -->
-
-      <!-- Normal Mode -->
-      <div class="content-header-section text-center align-parent sidebar-mini-hidden">
-        <!-- Close Sidebar, Visible only on mobile screens -->
-        <!-- Layout API, functionality initialized in Template._uiApiLayout() -->
-        <button type="button" class="btn btn-circle btn-dual-secondary d-lg-none align-v-r" data-toggle="layout" data-action="sidebar_close">
-          <i class="fa fa-times text-danger"></i>
-        </button>
-        <!-- END Close Sidebar -->
-
-        <!-- Logo -->
-        <div class="content-header-item">
-          <a class="link-effect font-w700" href="/">
-            <i class="si si-fire text-primary"></i>
-            <span class="font-size-xl text-dual-primary-dark">Like</span><span class="font-size-xl text-primary">Código</span>
-          </a>
-        </div>
-        <!-- END Logo -->
-      </div>
-      <!-- END Normal Mode -->
+      <div>
+        <button type="button" class="btn btn-sm btn-alt-danger d-lg-none" data-toggle="layout" data-action="sidebar_close">
+          <i class="fa fa-fw fa-times"></i>
+        </button>        
+      </div>      
     </div>
-    <!-- END Side Header -->
-
-    <!-- Sidebar Scrolling -->
-    <div class="js-sidebar-scroll">
-      <!-- Side User -->
-      <div class="content-side content-side-full content-side-user px-10 align-parent">
-        <!-- Visible only in mini mode -->
-        <div class="sidebar-mini-visible-b align-v animated fadeIn">
+    <div class="js-sidebar-scroll">      
+      <div class="content-side content-side-user px-0 py-0">        
+        <div class="smini-visible-block animated fadeIn px-3">
           <img class="img-avatar img-avatar32" src="{{ asset('media/various/little-face.png') }}" alt="">
         </div>
-        <!-- END Visible only in mini mode -->
-
-        <!-- Visible only in normal mode -->
-        <div class="sidebar-mini-hidden-b text-center">
-          <a class="img-link" href="javascript:void(0)">
+        <div class="smini-hidden text-center mx-auto">
+          <a class="img-link" href="#">
             <img class="img-avatar" src="{{ asset('media/various/little-face.png') }}" alt="">
           </a>
-          <ul class="list-inline mt-10">
+          <ul class="list-inline mt-3 mb-0">
             <li class="list-inline-item">
-              <a class="link-effect text-dual-primary-dark font-size-sm font-w600 text-uppercase" href="javascript:void(0)">
+              <a class="link-fx text-dual fs-sm fw-semibold text-uppercase" href="#">
                 {!! empty(\Auth::User()->empresa->nombre)?\Auth::User()->tipo_usuario->nombre:\Auth::User()->empresa->nombre !!}
               </a>
             </li>
-            <li class="list-inline-item">
-              <!-- Layout API, functionality initialized in Template._uiApiLayout() -->
-              <a class="link-effect text-dual-primary-dark" data-toggle="layout" data-action="sidebar_style_inverse_toggle" href="javascript:void(0)">
-                <i class="si si-drop"></i>
+            <li class="list-inline-item">              
+              <a class="link-fx text-dual" data-toggle="layout" data-action="dark_mode_toggle" href="javascript:void(0)">
+                <i class="fa fa-burn"></i>
               </a>
             </li>
             <li class="list-inline-item">
-              <a class="link-effect text-dual-primary-dark" href="javascript:void(0)">
-                <i class="si si-logout"></i>
+              <a class="link-fx text-dual" href="{!! route('logout') !!}" data-bs-toggle="tooltip" data-bs-placement="right" title="Cerrar sesión" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">@csrf</form>
+                <i class="fa fa-sign-out-alt text-danger"></i>
               </a>
             </li>
           </ul>
-        </div>
-        <!-- END Visible only in normal mode -->
+        </div>        
       </div>
-      <!-- END Side User -->
-
-      <!-- Side Navigation -->
       <div class="content-side content-side-full">
         <ul class="nav-main">
-          <li>
-            <a class="{{ request()->is('dashboard') ? ' active' : '' }}" href="{{ route('home') }}">
-              <i class="si si-cup"></i><span class="sidebar-mini-hide">Dashboard</span>
+          <li class="nav-main-item">
+            <a class="nav-main-link {{ request()->is('home') ? ' active' : '' }}" href="{{ route('home') }}" href="{{ route('home') }}">
+              <i class="nav-main-link-icon fa fa-user"></i>
+              <span class="nav-main-link-name">Dashboard</span>
             </a>
           </li>
-          @can('empresas.index')
-          <li>
-            <a href="{{ route('empresas.index') }}" class="{{ request()->is('empresas*') ? ' active' : '' }}">
-              <i class="fa fa-building"></i><span class="sidebar-mini-hide">Empresas</span>
+          <li class="nav-main-item">
+            <a class="nav-main-link {{ request()->is('empresas*') ? ' active' : '' }}" href="{{ route('empresas.index') }}">
+              <i class="nav-main-link-icon fa fa-building"></i>
+              <span class="nav-main-link-name">Empresas</span>
             </a>
           </li>
-          @endcan
-          <li>
-            <a href="{{ route('consultorios.index') }}" class="{{ request()->is('consultorios*') ? ' active' : '' }}">
-              <i class="fa fa-hospital-o"></i><span class="sidebar-mini-hide">Consultorios</span>
+          <li class="nav-main-item">
+            <a class="nav-main-link {{ request()->is('consultorios*') ? ' active' : '' }}" href="{{ route('consultorios.index') }}">
+              <i class="nav-main-link-icon fa fa-hospital"></i>
+              <span class="nav-main-link-name">Consultorios</span>
             </a>
           </li>
-          <li>
-            <a href="{{ route('medicos.index') }}" class="{{ request()->is('medicos*') ? ' active' : '' }}">
-              <i class="fa fa-hospital-o"></i><span class="sidebar-mini-hide">Médicos</span>
+          <li class="nav-main-item">
+            <a class="nav-main-link {{ request()->is('medicos*') ? ' active' : '' }}" href="{{ route('medicos.index') }}">
+              <i class="nav-main-link-icon fa fa-user-doctor"></i>
+              <span class="nav-main-link-name">Médicos</span>
             </a>
           </li>
-          <li>
-            <a href="{{ route('pacientes.index') }}" class="{{ request()->is('pacientes*') ? ' active' : '' }}">
-              <i class="fa fa-hospital-o"></i><span class="sidebar-mini-hide">Pacientes</span>
+          <li class="nav-main-item">
+            <a class="nav-main-link {{ request()->is('pacientes*') ? ' active' : '' }}" href="{{ route('pacientes.index') }}">
+              <i class="nav-main-link-icon fa fa-user-tie"></i>
+              <span class="nav-main-link-name">Pacientes</span>
             </a>
           </li>
-          <li class="nav-main-heading">
-            <span class="sidebar-mini-visible">MR</span><span class="sidebar-mini-hidden">Administración</span>
-          </li>
-          <li class="{{ request()->is('pages/*') ? ' open' : '' }}">
-            <a class="nav-submenu" data-toggle="nav-submenu" href="#"><i class="fa fa-dashboard"></i><span class="sidebar-mini-hide">Panel de control</span></a>
-            <ul>
-              <li>
-                <a class="{{ request()->is('pages/datatables') ? ' active' : '' }}" href="{{ route('users.index') }}">Usuarios</a>
+          <li class="nav-main-heading">Administración</li>
+          <li class="nav-main-item">
+            <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
+              <i class="nav-main-link-icon fa fa-grip-vertical"></i>
+              <span class="nav-main-link-name">Panel de control</span>
+            </a>
+            <ul class="nav-main-submenu">
+              <li class="nav-main-item">
+                <a class="nav-main-link" href="{{ route('users.index') }}">
+                  <span class="nav-main-link-name">Usuarios</span>
+                </a>
               </li>
-              <li>
-                <a class="{{ request()->is('roles*') ? ' active' : '' }}" href="{{ route('roles.index') }}">Roles</a>
+              <li class="nav-main-item">
+                <a class="nav-main-link" href="{{ route('roles.index') }}">
+                  <span class="nav-main-link-name">Roles</span>
+                </a>
               </li>
-              <li>
-                <a class="{{ request()->is('permissions*') ? ' active' : '' }}" href="{{ route('permissions.index') }}">Permisos</a>
+              <li class="nav-main-item">
+                <a class="nav-main-link" href="{{ route('permissions.index') }}">
+                  <span class="nav-main-link-name">Permisos</span>
+                </a>
               </li>
             </ul>
           </li>
         </ul>
-      </div>
-      <!-- END Side Navigation -->
-    </div>
-    <!-- END Sidebar Scrolling -->
-  </div>
-  <!-- Sidebar Content -->
+      </div>      
+    </div>    
+  </div>  
 </nav>
-<!-- END Sidebar -->

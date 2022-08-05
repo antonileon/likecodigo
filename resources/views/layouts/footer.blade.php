@@ -1,12 +1,12 @@
-<!-- Footer -->
 <footer id="page-footer">
-    <div class="content py-20 font-size-xs clearfix">
-        <div class="float-right">
-            Desarrollado por: <i class="fa fa-heart text-pulse"></i> by <a class="font-w600" href="https://1.envato.market/ydb" target="_blank">Antoni León</a>
-        </div>
-        <div class="float-left">
-            <a class="font-w600" href="https://1.envato.market/95j" target="_blank">WorkTech 1.0</a> &copy; <span class="js-year-copy"></span>
-        </div>
+  <div class="content py-3">
+    <div class="row fs-sm">
+      <div class="col-sm-6 order-sm-2 py-1 text-center text-sm-end">
+        Crafted with <i class="fa fa-heart text-danger"></i> by <a class="fw-semibold" href="https://1.envato.market/ydb" target="_blank">pixelcave</a>
+      </div>
+      <div class="col-sm-6 order-sm-1 py-1 text-center text-sm-start">
+        <a class="fw-semibold" href="https://1.envato.market/95j" target="_blank">Codebase 5.2</a> &copy; <span data-toggle="year-copy"></span>
+      </div>
     </div>
+  </div>
 </footer>
-<!-- END Footer -->

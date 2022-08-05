@@ -15,7 +15,7 @@
     <!-- Dynamic Table Full -->
     <div class="block">
       <div class="block-header block-header-default">
-        <h3 class="block-title"><i class="fa fa-hospital-o"></i> Registrar consultorio</h3>
+        <h3 class="block-title"><i class="fa fa-hospital"></i> Registrar consultorio</h3>
         <a href="{{ route('consultorios.index') }}" class="btn btn-primary btn-sm" title="Regresar al listado"><i class="fa fa-arrow-left"></i> Regresar</a>
       </div>
       <div class="block-content block-content-full">

@@ -10,6 +10,7 @@ use Spatie\Permission\Traits\HasRoles;
 use App\Models\Empresa;
 use App\Models\TipoUsuario;
 use App\Models\Medico;
+use App\Models\Paciente;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 
@@ -79,5 +80,10 @@ class User extends Authenticatable
     public function medico()
     {
         return $this->hasOne(Medico::class);
+    }
+
+    public function paciciente()
+    {
+        return $this->hasOne(Paciente::class);
     }
 }

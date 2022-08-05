@@ -1,7 +1,6 @@
 @extends('layouts.app')
 @section('title', __('Médicos'))
 @section('css')
-  <link rel="stylesheet" href="{{ asset('js/plugins/datatables/dataTables.bootstrap4.css') }}">
 @endsection
 
 @section('content')
@@ -14,7 +13,7 @@
     <!-- Dynamic Table Full -->
     <div class="block">
       <div class="block-header block-header-default">
-        <h3 class="block-title"><i class="fa fa-building"></i> Médicos</h3>
+        <h3 class="block-title"><i class="fa fa-user-doctor"></i> Médicos</h3>
         <a href="{{ route('medicos.create') }}" class="btn btn-primary btn-sm" title="Registrar empresa"><i class="fa fa-edit"></i> Registrar</a>
       </div>
       <div class="block-content block-content-full">
@@ -106,7 +105,4 @@
       })
     });
   </script>
-  <!-- Page JS Plugins -->
-  <script src="{{ asset('js/plugins/datatables/jquery.dataTables.min.js') }}"></script>
-  <script src="{{ asset('js/plugins/datatables/dataTables.bootstrap4.min.js') }}"></script>
 @endsection
