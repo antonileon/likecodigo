@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@section('title', __('Ver empresa'))
 @section('css')
 @endsection
 

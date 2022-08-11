@@ -39,8 +39,8 @@
               </a>
             </li>
             <li class="list-inline-item">
-              <a class="link-fx text-dual" href="{!! route('logout') !!}" data-bs-toggle="tooltip" data-bs-placement="right" title="Cerrar sesión" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">@csrf</form>
+              <a class="link-fx text-dual" href="{!! route('logout') !!}" data-bs-toggle="tooltip" data-bs-placement="right" title="Cerrar sesión" onclick="event.preventDefault(); document.getElementById('logout-form-sidebar').submit();">
+                <form id="logout-form-sidebar" action="{{ route('logout') }}" method="POST" class="d-none">@csrf</form>
                 <i class="fa fa-sign-out-alt text-danger"></i>
               </a>
             </li>

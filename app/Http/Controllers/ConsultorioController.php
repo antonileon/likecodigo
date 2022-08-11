@@ -87,7 +87,9 @@ class ConsultorioController extends Controller
         );
         foreach($arrData as $key){
             $acciones ='
-                <button type="button" class="btn btn-primary dropdown-toggle btn-sm btn-block" data-toggle="dropdown">Acciones</button>
+                <button type="button" class="btn btn-sm btn-primary btn-block" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-haspopup="true" aria-expanded="false">
+                    Acciones <i class="fa fa-angle-down opacity-50 ms-1"></i>
+                </button>
                 <div class="dropdown-menu">
                     <a href="consultorios/'.$key->slug.'" class="dropdown-item" title="Ver datos del consultorio">
                         <i class="fa fa-search"></i> Ver

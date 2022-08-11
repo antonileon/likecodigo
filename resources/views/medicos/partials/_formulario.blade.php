@@ -1,104 +1,89 @@
-@csrf
-<p class="text-center">Todos los campos con <b style="color:red;">*</b> son obligatorio.</p>
-<div class="col-md-12">
-  <div class="row">
-    <div class="col-md-4">
-      <div class="form-group">
-        <label for="tipo_documento_id">Tipo documento <b style="color:red;">*</b></label>
-        <select name="tipo_documento_id" id="tipo_documento_id" class="form-control">
-          @foreach($tipoDocumentos as $tipoDocumento)
-            <option value="{{ $tipoDocumento->id }}">{{ $tipoDocumento->nombre }}</option>
-          @endforeach
-        </select>
-      </div>
-      @error('tipo_documento_id')
-        <div class="alert alert-danger">{{ $message }}</div>
-      @enderror
+<div class="block-content block-content-full">
+  @csrf
+  <p class="text-center fw-bold">Todos los campos con <b style="color:red;">*</b> son obligatorio.</p>
+  @if ($errors->any())
+    <div class="alert alert-danger">
+      <ul>
+        @foreach ($errors->all() as $error)
+          <li>{{ $error }}</li>
+        @endforeach
+      </ul>
     </div>
-    <div class="col-md-4">
-      <div class="form-group">
-        <label for="numero_identificacion">Número de identificación <b style="color:red;">*</b></label>
-        <input type="text" class="form-control" name="numero_identificacion" id="numero_identificacion" placeholder="Número de identificación" value="{{ old('numero_identificacion', empty($medico->persona->numero_identificacion)?'':$medico->persona->numero_identificacion) }}">
+  @endif
+  <div class="col-md-12">
+    <div class="row mb-4">
+      <div class="col-md-4">
+        <div class="form-group">
+          <label class="form-label" for="tipo_documento_id">Tipo documento <b style="color:red;">*</b></label>
+          <select name="tipo_documento_id" id="tipo_documento_id" class="form-select js-select2" data-placeholder="Eliga una opción..">
+            @foreach($tipoDocumentos as $tipoDocumento)
+              <option></option>
+              <option value="{{ $tipoDocumento->id }}" {{ old('tipo_documento_id' , $medico->persona->tipo_documento_id)==$tipoDocumento->id? 'selected' : '' }}>{{ $tipoDocumento->nombre }}</option>
+            @endforeach
+          </select>
+        </div>
       </div>
-      @error('numero_identificacion')
-        <div class="alert alert-danger">{{ $message }}</div>
-      @enderror
-    </div>
-    <div class="col-md-4">
-      <div class="form-group">
-        <label for="nombre">Nombre <b style="color:red;">*</b></label>
-        <input type="text" class="form-control" name="nombre" id="nombre" placeholder="Nombre" value="{{ old('nombre', empty($medico->persona->nombre)?'':$medico->persona->nombre) }}">
+      <div class="col-md-4">
+        <div class="form-group">
+          <label class="form-label" for="numero_identificacion">Número de identificación <b style="color:red;">*</b></label>
+          <input type="text" class="form-control" name="numero_identificacion" id="numero_identificacion" placeholder="Número de identificación" value="{{ old('numero_identificacion', empty($medico->persona->numero_identificacion)?'':$medico->persona->numero_identificacion) }}" required>
+        </div>
       </div>
-      @error('nombre')
-        <div class="alert alert-danger">{{ $message }}</div>
-      @enderror
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-4">
-      <div class="form-group">
-        <label for="apellido">Apellido <b style="color:red;">*</b></label>
-        <input type="text" class="form-control" name="apellido" id="apellido" placeholder="Apellido" value="{{ old('apellido', empty($medico->persona->apellido)?'':$medico->persona->apellido) }}">
+      <div class="col-md-4">
+        <div class="form-group">
+          <label class="form-label" for="nombre">Nombre <b style="color:red;">*</b></label>
+          <input type="text" class="form-control" name="nombre" id="nombre" placeholder="Nombre" value="{{ old('nombre', empty($medico->persona->nombre)?'':$medico->persona->nombre) }}" required>
+        </div>
       </div>
-      @error('apellido')
-        <div class="alert alert-danger">{{ $message }}</div>
-      @enderror
     </div>
-    <div class="col-md-4">
-      <div class="form-group">
-        <label for="fecha_nacimiento">Fecha de nacimiento <b style="color:red;">*</b></label>
-        <input type="date" class="form-control" name="fecha_nacimiento" id="fecha_nacimiento" value="{{ old('fecha_nacimiento', empty($medico->persona->fecha_nacimiento)?'':$medico->persona->fecha_nacimiento) }}" max="{{ date('Y-m-d') }}">
+    <div class="row mb-4">
+      <div class="col-md-4">
+        <div class="form-group">
+          <label class="form-label" for="apellido">Apellido <b style="color:red;">*</b></label>
+          <input type="text" class="form-control" name="apellido" id="apellido" placeholder="Apellido" value="{{ old('apellido', empty($medico->persona->apellido)?'':$medico->persona->apellido) }}" required>
+        </div>
       </div>
-      @error('fecha_nacimiento')
-        <div class="alert alert-danger">{{ $message }}</div>
-      @enderror
-    </div>
-    <div class="col-md-4">
-      <div class="form-group">
-        <label for="telefono">Teléfono <b style="color:red;">*</b></label>
-        <input type="text" class="form-control" name="telefono" id="telefono" placeholder="Teléfono" value="{{ old('telefono', empty($medico->persona->telefono)?'':$medico->persona->telefono) }}">
+      <div class="col-md-4">
+        <div class="form-group">
+          <label class="form-label" for="fecha_nacimiento">Fecha de nacimiento <b style="color:red;">*</b></label>
+          <input type="date" class="form-control" name="fecha_nacimiento" id="fecha_nacimiento" value="{{ old('fecha_nacimiento', empty($medico->persona->fecha_nacimiento)?'':$medico->persona->fecha_nacimiento) }}" max="{{ date('Y-m-d') }}" required>
+        </div>
       </div>
-      @error('telefono')
-        <div class="alert alert-danger">{{ $message }}</div>
-      @enderror
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-4">
-      <div class="form-group">
-        <label for="email">Email <b style="color:red;">*</b></label>
-        <input type="email" class="form-control" name="email" id="email" placeholder="Email" value="{{ old('email', empty($medico->user->email)?'':$medico->user->email) }}">
+      <div class="col-md-4">
+        <div class="form-group">
+          <label class="form-label" for="telefono">Teléfono <b style="color:red;">*</b></label>
+          <input type="text" class="form-control" name="telefono" id="telefono" placeholder="Teléfono" value="{{ old('telefono', empty($medico->persona->telefono)?'':$medico->persona->telefono) }}" required>
+        </div>
       </div>
-      @error('email')
-        <div class="alert alert-danger">{{ $message }}</div>
-      @enderror
     </div>
-    <div class="col-md-4">
-      <div class="form-group">
-        <label for="password">Contraseña <b style="color:red;">*</b></label>
-        <input type="password" class="form-control" name="password" id="password" placeholder="Contraseña">
+    <div class="row mb-4">
+      <div class="col-md-4">
+        <div class="form-group">
+          <label class="form-label" for="email">Email <b style="color:red;">*</b></label>
+          <input type="email" class="form-control" name="email" id="email" placeholder="Email" value="{{ old('email', empty($medico->user->email)?'':$medico->user->email) }}" required>
+        </div>
       </div>
-      @error('password')
-        <div class="alert alert-danger">{{ $message }}</div>
-      @enderror
-    </div>
-    <div class="col-md-4">
-      <div class="form-group">
-        <label for="repita_contraseña">Repita contraseña <b style="color:red;">*</b></label>
-        <input type="password" class="form-control" name="repita_contraseña" id="repita_contraseña" placeholder="Repita contraseña">
+      <div class="col-md-4">
+        <div class="form-group">
+          <label class="form-label" for="password">Contraseña <b style="color:red;">*</b></label>
+          <input type="password" class="form-control" name="password" id="password" placeholder="Contraseña" required>
+        </div>
       </div>
-      @error('repita_contraseña')
-        <div class="alert alert-danger">{{ $message }}</div>
-      @enderror
+      <div class="col-md-4">
+        <div class="form-group">
+          <label class="form-label" for="repita_contraseña">Repita contraseña <b style="color:red;">*</b></label>
+          <input type="password" class="form-control" name="repita_contraseña" id="repita_contraseña" placeholder="Repita contraseña" required data-parsley-equalto="#password">
+        </div>
+      </div>
+      
     </div>
-    
   </div>
 </div>
-<hr>
-<div class="row justify-content-center text-center">
-  <div class="col-12">
-    <div class="form-group">
-      <button type="submit" class="btn btn-alt-primary" title="{{ $btnText }}"><i class="fa fa-edit"></i> {{ $btnText }}</button>
-    </div>
-  </div>
+<div class="block-content block-content-full block-content-sm bg-body-light text-end">
+  <button type="reset" class="btn btn-alt-secondary">
+    <i class="fa fa-sync-alt opacity-50 me-1"></i> Limpiar
+  </button>
+  <button type="submit" class="btn btn-alt-primary" title="{{ $btnText }}">
+    <i class="fa fa-check opacity-50 me-1"></i> {{ $btnText }}
+  </button>
 </div>

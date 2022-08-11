@@ -1,6 +1,6 @@
 <div class="block-content block-content-full">
   @csrf
-  <p class="text-center">Todos los campos con <b style="color:red;">*</b> son obligatorio.</p>
+  <p class="text-center fw-bold">Todos los campos con <b style="color:red;">*</b> son obligatorio.</p>
   @if ($errors->any())
     <div class="alert alert-danger">
       <ul>

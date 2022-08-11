@@ -13,7 +13,7 @@
     <!-- Dynamic Table Full -->
     <div class="block">
       <div class="block-header block-header-default">
-        <h3 class="block-title"><i class="fa fa-building"></i> Editar médico</h3>
+        <h3 class="block-title"><i class="fa fa-user-doctor"></i> Editar médico</h3>
         <a href="{{ route('medicos.index') }}" class="btn btn-primary btn-sm" title="Regresar al listado"><i class="fa fa-arrow-left"></i> Regresar</a>
       </div>
       <div class="block-content block-content-full">

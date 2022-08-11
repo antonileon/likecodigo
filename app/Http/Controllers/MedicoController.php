@@ -60,6 +60,7 @@ class MedicoController extends Controller
             $totalFilter = $totalFilter->where('personas.nombre','like','%'.$searchValue.'%');
             $totalFilter = $totalFilter->orWhere('personas.apellido','like','%'.$searchValue.'%');
             $totalFilter = $totalFilter->orWhere('personas.numero_identificacion','like','%'.$searchValue.'%');
+            $totalFilter = $totalFilter->orWhere('personas.telefono','like','%'.$searchValue.'%');
         }
         if (\Auth::User()->tipo_usuario_id!=1) {
             $totalFilter = $totalFilter->where('users.empresa_id',\Auth::User()->empresa->id);
@@ -85,6 +86,7 @@ class MedicoController extends Controller
             $arrData = $arrData->where('personas.nombre','like','%'.$searchValue.'%');
             $arrData = $arrData->orWhere('personas.apellido','like','%'.$searchValue.'%');
             $arrData = $arrData->orWhere('personas.numero_identificacion','like','%'.$searchValue.'%');
+            $arrData = $arrData->orWhere('personas.telefono','like','%'.$searchValue.'%');
         }
         if (\Auth::User()->tipo_usuario_id!=1) {
             $arrData = $arrData->where('users.empresa_id',\Auth::User()->empresa->id);
@@ -120,7 +122,9 @@ class MedicoController extends Controller
     public function accionesIndex($slug)
     {
         $acciones ='
-            <button type="button" class="btn btn-primary dropdown-toggle btn-sm btn-block" data-toggle="dropdown">Acciones</button>
+            <button type="button" class="btn btn-sm btn-primary btn-block" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-haspopup="true" aria-expanded="false">
+                Acciones <i class="fa fa-angle-down opacity-50 ms-1"></i>
+            </button>
             <div class="dropdown-menu">
                 <a href="medicos/'.$slug.'" class="dropdown-item" title="Ver datos del médico">
                     <i class="fa fa-search"></i> Ver
@@ -156,7 +160,7 @@ class MedicoController extends Controller
         ]);sts\StoreMedicoRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreMedicoRequest $request)
     {
         $persona = Persona::create([
             'tipo_documento_id'         => $request->tipo_documento_id,

@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@section('title', __('Editar empresa'))
 @section('css')
 @endsection
 
@@ -11,7 +11,7 @@
       <span class="breadcrumb-item active">Editar</span>
     </nav>
     <!-- Dynamic Table Full -->
-    <div class="block">
+    <div class="block block-rounded">
       <div class="block-header block-header-default">
         <h3 class="block-title"><i class="fa fa-building"></i> Editar empresa</h3>
         <a href="{{ route('empresas.index') }}" class="btn btn-primary btn-sm" title="Regresar al listado"><i class="fa fa-arrow-left"></i> Regresar</a>
