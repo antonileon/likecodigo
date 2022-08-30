@@ -64,6 +64,7 @@ class RoleController extends Controller
             $ver = '<a href="roles/'.$key->id.'" title="Ver permisos de este rol">'.$key->name.'</a>';
             $response['data'][] = [
                 "name"                      => $ver,
+                "permisos"                  => $key->permissions->count(),
                 "acciones"                  => $this->accionesIndex($key->id)
             ];
         }

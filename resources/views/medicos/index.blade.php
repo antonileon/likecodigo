@@ -24,6 +24,7 @@
               <th class="d-none d-sm-table-cell">Número de identificación</th>
               <th>teléfono</th>
               <th>Email</th>
+              <th>Status</th>
               <th>Acciones</th>
             </tr>
           </thead>
@@ -37,11 +38,9 @@
   <script type="text/javascript">
     $(document).ready( function () {
       $('#medicosTable').DataTable({
-        oLanguage: {
-          sProcessing  : "<i class='fa fa-spinner fa-spin'></i> Cargando registros...",
-          searchPlaceholder: "Buscar registro",
-        },
         language: {
+          sProcessing  : "Cargando registros...",
+          searchPlaceholder: "Buscar registro",
           url: '//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json'
         },
         processing: true,
@@ -54,6 +53,7 @@
           { data: 'numero_identificacion'},
           { data: 'telefono'},
           { data: 'email'},
+          { data: 'status'},
           { data: 'acciones'},
         ],
         order: [[0, 'desc']],

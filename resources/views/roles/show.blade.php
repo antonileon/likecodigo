@@ -30,7 +30,7 @@
             </p>
           </div>
           <div class="col-sm-6 py-2 text-md-end">
-            <a class="btn btn-sm btn-outline-warning me-1 my-1" href="javascript:void(0)">
+            <a class="btn btn-sm btn-outline-warning me-1 my-1" href="{{ route('roles.edit', $role->id) }}">
               <i class="fa fa-pencil opacity-50 me-1"></i> Editar
             </a>
           </div>

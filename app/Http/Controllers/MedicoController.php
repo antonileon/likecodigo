@@ -52,7 +52,8 @@ class MedicoController extends Controller
                 'personas.numero_identificacion',
                 'personas.telefono',
                 'users.email',
-                'users.empresa_id'
+                'users.empresa_id',
+                'users.status'
             ])
             ->join('personas','personas.id','=','medicos.persona_id')
             ->join('users','users.id','=','medicos.user_id');
@@ -76,7 +77,8 @@ class MedicoController extends Controller
                 'personas.numero_identificacion',
                 'personas.telefono',
                 'users.email',
-                'users.empresa_id'
+                'users.empresa_id',
+                'users.status'
             ])
             ->join('personas','personas.id','=','medicos.persona_id')
             ->join('users','users.id','=','medicos.user_id');
@@ -103,15 +105,16 @@ class MedicoController extends Controller
         foreach($arrData as $key){
             $ver = '<a href="medicos/'.$key->slug.'" title="Ver datos del médico">'.$key->nombre.' '.$key->apellido.'</a>';
             if ($key->status=="Activo") {
-                $status = '<span class="badge badge-success">'.$key->status.'</span>';
+                $status = '<span class="badge bg-success">'.$key->status.'</span>';
             } else {
-                $status = '<span class="badge badge-danger">'.$key->status.'</span>';
+                $status = '<span class="badge bg-danger">'.$key->status.'</span>';
             }
             $response['data'][] = [
                 "nombre"                    => $ver,
                 "numero_identificacion"     => $key->numero_identificacion,
                 "telefono"                  => $key->telefono,
                 "email"                     => $key->email,
+                "status"                    => $status,
                 "acciones"                  => $this->accionesIndex($key->slug)
             ];
         }
@@ -175,7 +178,7 @@ class MedicoController extends Controller
 
         $usuario = User::create([
             'empresa_id'                => \Auth::User()->empresa->id,
-            'tipo_usuario_id'           => 2,
+            'tipo_usuario_id'           => 3,
             'nombre'                    => $request->nombre,
             'apellido'                  => $request->apellido,
             'nombre_usuario'            => $request->email,

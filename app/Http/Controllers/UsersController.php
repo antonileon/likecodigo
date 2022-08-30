@@ -74,9 +74,9 @@ class UsersController extends Controller
         );
         foreach($arrData as $key){
             if ($key->status=="Activo") {
-                $status = '<span class="badge badge-success">'.$key->status.'</span>';
+                $status = '<span class="badge bg-success">'.$key->status.'</span>';
             } else {
-                $status = '<span class="badge badge-danger">'.$key->status.'</span>';
+                $status = '<span class="badge bg-success">'.$key->status.'</span>';
             }
             
             $response['data'][] = [
@@ -171,5 +171,14 @@ class UsersController extends Controller
     {
         $user->delete();
         return response()->json(['mensaje'=>"Usuario eliminado con éxito.",'icono'=>'success']);
+    }
+
+    public function cambiarTema(Request $request)
+    {
+        $user = User::findOrFail(\Auth::User()->id);
+        $user->tema = $request->tema;
+        $user->save();
+
+        return response()->json($request->tema);
     }
 }

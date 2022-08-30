@@ -34,7 +34,10 @@ Auth::routes();
 Route::group(['middleware' => ['web', 'auth']], function() {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     ########------------------------USUARIOS-----------------------------------------------------########
-    Route::get('/users/get-index',[UsersController::class, 'getIndex']);
+    Route::controller(UsersController::class)->group(function() {
+        Route::get('/users/get-index', 'getIndex');
+        Route::post('/users/cambiar-tema', 'cambiarTema');
+    });
     ########------------------------EMPRESAS-----------------------------------------------------########
     Route::get('/empresas/get-index',[EmpresaController::class, 'getIndex']);
     ########------------------------CONSULTORIOS-------------------------------------------------########

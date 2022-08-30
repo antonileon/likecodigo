@@ -33,10 +33,9 @@
                 {!! empty(\Auth::User()->empresa->nombre)?\Auth::User()->tipo_usuario->nombre:\Auth::User()->empresa->nombre !!}
               </a>
             </li>
-            <li class="list-inline-item">              
-              <a class="link-fx text-dual" data-toggle="layout" data-action="dark_mode_toggle" href="javascript:void(0)">
-                <i class="fa fa-burn"></i>
-              </a>
+            <li class="list-inline-item">
+              <label for="tema" style="cursor: pointer;"><span id="icono_tema" data-bs-toggle="tooltip" data-bs-placement="top" title="Cambiar tema"></span></label>
+              <input type="checkbox" name="tema" value="1" id="tema" style="display: none;" @if(tema()==1) checked="true" @endif)>
             </li>
             <li class="list-inline-item">
               <a class="link-fx text-dual" href="{!! route('logout') !!}" data-bs-toggle="tooltip" data-bs-placement="right" title="Cerrar sesión" onclick="event.preventDefault(); document.getElementById('logout-form-sidebar').submit();">

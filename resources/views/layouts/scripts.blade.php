@@ -23,6 +23,47 @@
 			toast.addEventListener('mouseleave', Swal.resumeTimer)
 		}
     })
+    $(document).ready(tema);
+	function tema() {
+		if ($('#tema').prop('checked')) {
+			$('#page-container').addClass('dark-mode sidebar-dark page-header-dark');
+      		$("#icono_tema").append('<i class="fas fa-sun"></i>');
+		} else {
+			$('#page-container').removeClass('dark-mode sidebar-dark page-header-dark');
+      		$("#icono_tema").append('<i class="fas fa-moon"></i>');
+		}
+	}
+	$('#tema').click(function(e) {
+		if ($(this).is(':checked')) {
+			var tema = 1;
+			$("#icono_tema").empty();
+			$("#icono_tema").append('<i class="fas fa-sun"></i>');
+		} else {
+			var tema = 0;
+    		$("#icono_tema").empty();
+			$("#icono_tema").append('<i class="fas fa-moon"></i>');
+		}
+		console.log(tema)
+		$.ajaxSetup({
+			headers: {
+		  		'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+			}
+		});
+		$.ajax({
+		    url: "/users/cambiar-tema",
+		    method: 'POST',
+		    data: {
+		    	tema: tema,
+		    },
+		    success: function(data) {
+		    	if (data==1) {
+					$('#page-container').addClass('dark-mode sidebar-dark page-header-dark');
+		    	} else {
+					$('#page-container').removeClass('dark-mode sidebar-dark page-header-dark');
+		    	}
+		    }
+  		});
+	});
 </script>
 <script>Codebase.helpersOnLoad(['jq-select2']);</script>
 @yield('scripts')

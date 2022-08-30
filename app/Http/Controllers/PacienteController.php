@@ -6,6 +6,9 @@ use App\Models\Paciente;
 use Illuminate\Http\Request;
 use App\Http\Requests\StorePacienteRequest;
 use App\Http\Requests\UpdatePacienteRequest;
+use App\Models\TipoDocumento;
+use App\Models\Persona;
+use App\Models\User;
 
 class PacienteController extends Controller
 {
@@ -117,15 +120,17 @@ class PacienteController extends Controller
     public function accionesIndex($slug)
     {
         $acciones ='
-            <button type="button" class="btn btn-primary dropdown-toggle btn-sm btn-block" data-toggle="dropdown">Acciones</button>
+            <button type="button" class="btn btn-sm btn-primary btn-block" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-haspopup="true" aria-expanded="false">
+                Acciones <i class="fa fa-angle-down opacity-50 ms-1"></i>
+            </button>
             <div class="dropdown-menu">
-                <a href="pacientes/'.$slug.'" class="dropdown-item" title="Ver datos del médico">
+                <a href="pacientes/'.$slug.'" class="dropdown-item" title="Ver datos del paciente">
                     <i class="fa fa-search"></i> Ver
                 </a>
-                <a href="pacientes/'.$slug.'/edit" class="dropdown-item" title="Editar datos del médico">
+                <a href="pacientes/'.$slug.'/edit" class="dropdown-item" title="Editar datos del paciente">
                     <i class="fa fa-pencil"></i> Editar
                 </a>
-                <a href="javascript:void(0);" data-mc="'.$slug.'" title="Eliminar médico" id="eliminarMedico" class="dropdown-item">
+                <a href="javascript:void(0);" data-mc="'.$slug.'" title="Eliminar paciente" id="eliminarPaciente" class="dropdown-item">
                     <i class="fa fa-trash"></i> Eliminar
                 </a>
             </div>';
@@ -139,7 +144,10 @@ class PacienteController extends Controller
      */
     public function create()
     {
-        //
+        $tipoDocumentos = TipoDocumento::all();
+        return view('pacientes.create',[
+                'paciente'   => new Paciente
+            ],compact('tipoDocumentos'));
     }
 
     /**
@@ -150,7 +158,35 @@ class PacienteController extends Controller
      */
     public function store(StorePacienteRequest $request)
     {
-        //
+        $persona = Persona::create([
+            'tipo_documento_id'         => $request->tipo_documento_id,
+            'numero_identificacion'     => $request->numero_identificacion,
+            'nombre'                    => $request->nombre,
+            'apellido'                  => $request->apellido,
+            'fecha_nacimiento'          => $request->fecha_nacimiento,
+            'telefono'                  => $request->telefono,
+            'genero'                    => 'Otros',
+            'direccion'                 => '$request->direccion'
+        ]);
+
+        $usuario = User::create([
+            'empresa_id'                => \Auth::User()->empresa->id,
+            'tipo_usuario_id'           => 4,
+            'nombre'                    => $request->nombre,
+            'apellido'                  => $request->apellido,
+            'nombre_usuario'            => $request->email,
+            'email'                     => $request->email,
+            'password'                  => bcrypt($request->password)
+        ]);
+
+        $medico = Paciente::create([
+            'user_id'                   => $usuario->id,
+            'persona_id'                => $persona->id,
+            'slug'                      => $request->nombre
+        ]);
+
+        toast('Paciente '.strtoupper($request->nombre).' registrado con éxito.','success');
+        return redirect()->route('pacientes.index');
     }
 
     /**

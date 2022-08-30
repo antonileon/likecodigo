@@ -48,15 +48,4 @@ class StoreMedicoRequest extends FormRequest
             'password'                             => 'contraseña',
         ];
     }
-
-    /*public function mesagges()
-    {
-        return [
-            'tipo_documento_id.required'                   => 'El campo tipo de documento es obligatorio.',
-            'numero_identificacion.required'               => 'El número de identificación es obligatorio.',
-            'nombre.required'                              => 'El campo nombre es obligatorio.',
-            'apellido.required'                            => 'El campo apellido es obligatorio.',
-            'fecha_nacimiento.required'                    => 'El campo fecha de nacimiento es obligatorio.',
-        ];
-    }*/
 }

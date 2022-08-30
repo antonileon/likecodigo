@@ -21,6 +21,7 @@
           <thead>
             <tr>
               <th>Nombre</th>
+              <th>N° de permisos</th>
               <th width="20%">Acciones</th>
             </tr>
           </thead>
@@ -34,10 +35,8 @@
   <script type="text/javascript">
     $(document).ready( function () {
       $('#rolesTable').DataTable({
-        oLanguage: {
-          sProcessing  : "<i class='fa fa-spinner fa-spin'></i> Cargando registros...",
-        },
         language: {
+          sProcessing  : "Cargando registros...",
           url: '//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json',
           searchPlaceholder: "Buscar registro",
         },
@@ -48,6 +47,7 @@
         ajax: "{{ url('roles/get-index') }}",
         columns: [
           { data: 'name'},
+          { data: 'permisos'},
           { data: 'acciones'},
         ],
         order: [[0, 'desc']],

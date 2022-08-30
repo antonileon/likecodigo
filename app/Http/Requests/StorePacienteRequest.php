@@ -13,7 +13,7 @@ class StorePacienteRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,28 @@ class StorePacienteRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'tipo_documento_id'                    => 'required',
+            'numero_identificacion'                => 'required',
+            'nombre'                               => 'required',
+            'apellido'                             => 'required',
+            'fecha_nacimiento'                     => 'required',
+            'telefono'                             => 'required',
+            'email'                                => 'required',
+            'password'                             => 'required',
+        ];
+    }
+
+    public function attributes()
+    {
+        return [
+            'tipo_documento_id'                    => 'nombre',
+            'numero_identificacion'                => 'número de identificación',
+            'nombre'                               => 'nombre',
+            'apellido'                             => 'apellido',
+            'fecha_nacimiento'                     => 'fecha de nacimiento',
+            'telefono'                             => 'teléfono',
+            'email'                                => 'email',
+            'password'                             => 'contraseña',
         ];
     }
 }

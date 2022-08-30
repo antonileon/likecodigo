@@ -132,31 +132,19 @@
           </div>
         </div>
       </div>
-      
-
-      
-      
       <button type="button" class="btn btn-sm btn-alt-secondary" data-toggle="layout" data-action="side_overlay_toggle">
         <i class="fa fa-fw fa-stream"></i>
       </button>
-      
     </div>
-    
   </div>
-  
-
-  
   <div id="page-header-search" class="overlay-header bg-body-extra-light">
     <div class="content-header">
-      <form class="w-100" action="https://demo.pixelcave.com/codebase/be_pages_generic_search.html" method="POST">
+      <form class="w-100" action="javascript:;" method="POST">
         <div class="input-group">
-          
-          
           <button type="button" class="btn btn-secondary" data-toggle="layout" data-action="header_search_off">
             <i class="fa fa-fw fa-times"></i>
           </button>
-          
-          <input type="text" class="form-control" placeholder="Search or hit ESC.." id="page-header-search-input" name="page-header-search-input">
+          <input type="text" class="form-control" placeholder="Busca o presiona ESC.." id="page-header-search-input" name="page-header-search-input">
           <button type="submit" class="btn btn-secondary">
             <i class="fa fa-fw fa-search"></i>
           </button>
@@ -164,10 +152,6 @@
       </form>
     </div>
   </div>
-  
-
-  
-  
   <div id="page-header-loader" class="overlay-header bg-primary">
     <div class="content-header">
       <div class="w-100 text-center">

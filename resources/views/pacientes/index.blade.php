@@ -6,14 +6,14 @@
 @section('content')
   <!-- Page Content -->
   <div class="content">
-    <nav class="breadcrumb bg-white push">
+    <nav class="breadcrumb push bg-body-extra-light rounded-pill px-4 py-2">
       <a class="breadcrumb-item" href="javascript:void(0)">Pacientes</a>
       <span class="breadcrumb-item active">Listado</span>
     </nav>
     <!-- Dynamic Table Full -->
-    <div class="block">
+    <div class="block block-rounded">
       <div class="block-header block-header-default">
-        <h3 class="block-title"><i class="fa fa-building"></i> Pacientes</h3>
+        <h3 class="block-title"><i class="nav-main-link-icon fa fa-user-tie"></i> Pacientes</h3>
         <a href="{{ route('pacientes.create') }}" class="btn btn-primary btn-sm" title="Registrar empresa"><i class="fa fa-edit"></i> Registrar</a>
       </div>
       <div class="block-content block-content-full">
@@ -37,11 +37,9 @@
   <script type="text/javascript">
     $(document).ready( function () {
       $('#pacientesTable').DataTable({
-        oLanguage: {
-          sProcessing  : "<i class='fa fa-spinner fa-spin'></i> Cargando registros...",
-          searchPlaceholder: "Buscar registro",
-        },
         language: {
+          sProcessing  : "Cargando registros...",
+          searchPlaceholder: "Buscar registro",
           url: '//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json'
         },
         processing: true,

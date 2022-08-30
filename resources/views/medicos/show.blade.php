@@ -48,6 +48,12 @@
         <div class="row mb-4">
           <div class="col-md-3">
             <div class="form-group">
+              <label class="fw-bold">Tipo de documento</label>
+              <div class="form-control-plaintext">{{ $medico->persona->tipo_documento->nombre }}</div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group">
               <label class="fw-bold">Nro. identificación</label>
               <div class="form-control-plaintext">{{ $medico->persona->numero_identificacion }}</div>
             </div>
@@ -64,6 +70,8 @@
               <div class="form-control-plaintext">{{ $medico->user->nombre_usuario }}</div>
             </div>
           </div>
+        </div>
+        <div class="row mb-4">
           <div class="col-md-3">
             <div class="form-group">
               <label class="fw-bold">Status</label>
@@ -76,8 +84,6 @@
               </div>
             </div>
           </div>
-        </div>
-        <div class="row mb-4">
           <div class="col-md-3">
             <div class="form-group">
               <label class="fw-bold">Fecha de registro</label>
