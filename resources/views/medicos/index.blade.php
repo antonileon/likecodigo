@@ -17,7 +17,7 @@
         <a href="{{ route('medicos.create') }}" class="btn btn-primary btn-sm" title="Registrar empresa"><i class="fa fa-edit"></i> Registrar</a>
       </div>
       <div class="block-content block-content-full">
-        <table class="table table-bordered table-striped table-vcenter js-dataTable-full table-sm" id="medicosTable">
+        <table class="table table-bordered table-striped table-vcenter js-dataTable-full table-sm" id="medicosTable" style="font-size: 12px;">
           <thead>
             <tr>
               <th>Nombre</th>

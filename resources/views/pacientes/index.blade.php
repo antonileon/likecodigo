@@ -14,10 +14,11 @@
     <div class="block block-rounded">
       <div class="block-header block-header-default">
         <h3 class="block-title"><i class="nav-main-link-icon fa fa-user-tie"></i> Pacientes</h3>
-        <a href="{{ route('pacientes.create') }}" class="btn btn-primary btn-sm" title="Registrar empresa"><i class="fa fa-edit"></i> Registrar</a>
+        <a href="{{ route('pacientes.create') }}" class="btn btn-primary btn-sm" title="Registrar empresa"><i class="fa fa-edit"></i> Registrar</a>&nbsp;
+        <a href="{{ route('excel.pacientes') }}" class="btn btn-danger btn-sm" title="Reporte Excel" target="_blank"><i class="fa fa-file-excel"></i> Reporte Excel</a>
       </div>
       <div class="block-content block-content-full">
-        <table class="table table-bordered table-striped table-vcenter js-dataTable-full table-sm" id="pacientesTable">
+        <table class="table table-bordered table-striped table-vcenter js-dataTable-full table-sm" id="pacientesTable" style="font-size: 12px;">
           <thead>
             <tr>
               <th>Nombre</th>

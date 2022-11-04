@@ -93,8 +93,25 @@
                   <label class="form-label" for="repita_contraseña">Repita contraseña <b style="color:red;">*</b></label>
                   <input type="password" class="form-control" name="repita_contraseña" id="repita_contraseña" placeholder="Repita contraseña" required data-parsley-equalto="#password">
                 </div>
+              </div>              
+            </div>
+            <h2 class="content-heading">Asignar especialidades</h2>
+            <div class="row mb-4">
+              <div class="col-lg-4">
+                <p class="text-muted">
+                  Puede seleccionar múltiples especialidades para asignar a este médico.
+                </p>
               </div>
-              
+              <div class="col-lg-8 col-xl-8">
+                <div class="mb-4">
+                  <select class="js-select2 form-select" id="especialidade_id" name="especialidade_id[]" style="width: 100%;" data-placeholder="Elige especialidades.." multiple required>
+                    <option></option>
+                    @foreach($especialidades as $especialidad)
+                      <option value="{{ $especialidad->id }}">{{ $especialidad->especialidad }}</option>
+                    @endforeach
+                  </select>
+                </div>
+              </div>
             </div>
           </div>
         </div>

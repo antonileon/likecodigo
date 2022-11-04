@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
         $this->call(EmpresaSeeder::class);
         $this->call(UsersTableSeeder::class);
         \App\Models\Consultorio::factory(5)->create();
+        $this->call(EspecialidadeSeeder::class);
         //\App\Models\Empresa::factory(5)->create();
     }
 }

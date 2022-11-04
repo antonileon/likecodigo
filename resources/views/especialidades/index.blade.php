@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', __('Roles'))
+@section('title', __('Especialidades'))
 @section('css')
 @endsection
 
@@ -7,22 +7,24 @@
   <!-- Page Content -->
   <div class="content">
     <nav class="breadcrumb push bg-body-extra-light rounded-pill px-4 py-2">
-      <a class="breadcrumb-item" href="javascript:void(0)">Roles</a>
+      <a class="breadcrumb-item" href="javascript:void(0)">Especialidades</a>
       <span class="breadcrumb-item active">Listado</span>
     </nav>
     <!-- Dynamic Table Full -->
     <div class="block block-rounded">
       <div class="block-header block-header-default">
-        <h3 class="block-title"><i class="fa fa-cogs"></i> Roles</h3>
-        <a href="{{ route('roles.create') }}" class="btn btn-primary btn-sm" title="Registrar rol"><i class="fa fa-edit"></i> Registrar</a>
+        <h3 class="block-title"><i class="nav-main-link-icon fa-solid fa-stethoscope"></i> Especialidades</h3>
+        <a href="{{ route('pacientes.create') }}" class="btn btn-primary btn-sm" title="Registrar empresa"><i class="fa fa-edit"></i> Registrar</a>
       </div>
       <div class="block-content block-content-full">
-        <table class="table table-bordered table-striped table-vcenter js-dataTable-full table-sm" id="rolesTable" style="font-size: 12px;">
+        <table class="table table-bordered table-striped table-vcenter js-dataTable-full table-sm" id="pacientesTable" style="font-size: 12px;">
           <thead>
             <tr>
               <th>Nombre</th>
-              <th>N° de permisos</th>
-              <th width="20%">Acciones</th>
+              <th class="d-none d-sm-table-cell">Número de identificación</th>
+              <th>teléfono</th>
+              <th>Email</th>
+              <th>Acciones</th>
             </tr>
           </thead>
           <tbody></tbody>
@@ -34,34 +36,35 @@
 @section('scripts')
   <script type="text/javascript">
     $(document).ready( function () {
-      $('#rolesTable').DataTable({
+      $('#pacientesTable').DataTable({
         language: {
           sProcessing  : "Cargando registros...",
-          url: '//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json',
           searchPlaceholder: "Buscar registro",
+          url: '//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json'
         },
         processing: true,
         serverSide: true,
         responsive: true,
         autoWidth:false,
-        ajax: "{{ url('roles/get-index') }}",
+        ajax: "{{ url('pacientes/get-index') }}",
         columns: [
-          { data: 'name'},
-          { data: 'permisos'},
+          { data: 'nombre'},
+          { data: 'numero_identificacion'},
+          { data: 'telefono'},
+          { data: 'email'},
           { data: 'acciones'},
         ],
         order: [[0, 'desc']],
         columnDefs:[
-          {targets: [1], orderable: false},
+          {targets: [4], orderable: false},
         ]
       });
     });
-
-    //--CODIGO PARA ELIMINAR ROL------------------//
-    $('body').on('click', '#eliminarRol', function() {
+    //--CODIGO PARA ELIMINAR EMPRESA------------------//
+    $('body').on('click', '#eliminarPaciente', function() {
       var id = $(this).data('mc');
       Swal.fire({
-        title: '¿Estás seguro que desea eliminar este rol?',
+        title: '¿Estás seguro que desea eliminar este paciente?',
         text: "¡Esta opción no podrá deshacerse en el futuro!",
         icon: 'warning',
         showCancelButton: true,
@@ -78,7 +81,7 @@
           });
           $.ajax({
             type:"DELETE",
-            url: "roles/"+id+"",
+            url: "pacientes/"+id+"",
             data: { id: id },
             dataType: 'json',
             success: function(data){
@@ -86,13 +89,13 @@
                 icon: data.icono,
                 title: data.mensaje
               })
-              var oTable = $('#rolesTable').dataTable();
+              var oTable = $('#pacientesTable').dataTable();
               oTable.fnDraw(false);
             },
             error: function (data) {
               Toast.fire({
                 icon: 'error',
-                title: 'Error del servidor, rol no eliminado.'
+                title: 'Error del servidor, paciente no eliminado.'
               })
             }
           });

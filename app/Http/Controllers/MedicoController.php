@@ -9,6 +9,7 @@ use App\Http\Requests\UpdateMedicoRequest;
 use App\Models\TipoDocumento;
 use App\Models\Persona;
 use App\Models\User;
+use App\Models\Especialidade;
 
 class MedicoController extends Controller
 {
@@ -150,9 +151,10 @@ class MedicoController extends Controller
     public function create()
     {
         $tipoDocumentos = TipoDocumento::all();
+        $especialidades = Especialidade::all();
         return view('medicos.create',[
-                'medico'   => new Medico
-            ],compact('tipoDocumentos'));
+                'medico'            => new Medico
+            ],compact('tipoDocumentos','especialidades'));
     }
 
     /**
@@ -191,6 +193,8 @@ class MedicoController extends Controller
             'persona_id'                => $persona->id,
             'slug'                      => $request->nombre
         ]);
+
+        $medico->especialidade()->sync($request->especialidade_id);
 
         toast('Médico '.strtoupper($request->nombre).' registrado con éxito.','success');
         return redirect()->route('medicos.index');

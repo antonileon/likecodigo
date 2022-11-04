@@ -78,6 +78,18 @@
               <span class="nav-main-link-name">Pacientes</span>
             </a>
           </li>
+          <li class="nav-main-item">
+            <a class="nav-main-link {{ request()->is('especialidades*') ? ' active' : '' }}" href="{{ route('especialidades.index') }}">
+              <i class="nav-main-link-icon fa-solid fa-stethoscope"></i>
+              <span class="nav-main-link-name">Especialidades</span>
+            </a>
+          </li>
+          <li class="nav-main-item">
+            <a class="nav-main-link {{ request()->is('servicios*') ? ' active' : '' }}" href="{{ route('servicios.index') }}">
+              <i class="nav-main-link-icon fa-solid fa-tooth"></i>
+              <span class="nav-main-link-name">Servicios</span>
+            </a>
+          </li>
           <li class="nav-main-heading">Administración</li>
           <li class="nav-main-item">
             <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
@@ -101,6 +113,12 @@
                 </a>
               </li>
             </ul>
+          </li>
+          <li class="nav-main-item">
+            <a class="nav-main-link {{ request()->is('home') ? ' active' : '' }}" href="{{ route('home') }}" href="{{ route('home') }}">
+              <i class="nav-main-link-icon fa fa-cogs"></i>
+              <span class="nav-main-link-name">Administrador</span>
+            </a>
           </li>
         </ul>
       </div>      

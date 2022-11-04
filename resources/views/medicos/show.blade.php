@@ -23,7 +23,7 @@
           <div class="col-md-3">
             <div class="form-group">
               <label class="fw-bold">Empresa</label>
-              <div class="form-control-plaintext">{{ $medico->user->empresa->nombre }}</div>
+              <div class="form-control-plaintext">{{ empty($medico->user->empresa->nombre)?'No posee':$medico->user->empresa->nombre }}</div>
             </div>
           </div>
           <div class="col-md-3">
@@ -74,6 +74,18 @@
         <div class="row mb-4">
           <div class="col-md-3">
             <div class="form-group">
+              <label class="fw-bold">Fecha de nacimiento</label>
+              <div class="form-control-plaintext">{{ date('d/m/Y', strtotime($medico->persona->fecha_nacimiento)) }}</div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group">
+              <label class="fw-bold">Edad</label>
+              <div class="form-control-plaintext">{{ calcularEdad($medico->persona->fecha_nacimiento) }}</div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group">
               <label class="fw-bold">Status</label>
               <div class="form-control-plaintext">
                 @if ($medico->user->status=="Activo")
@@ -89,10 +101,14 @@
               <label class="fw-bold">Fecha de registro</label>
               <div class="form-control-plaintext">{{ date('d/m/Y - H:i:s', strtotime($medico->user->created_at)) }}</div>
             </div>
-          </div>          
+          </div>
         </div><hr>
         <div class="row mb-4">
-          <div class="col-md-12">
+          <div class="col-md-6 border-start border-5 border-primary">
+            <p class="fw-bold">Especialidades</p>
+            
+          </div>
+          <div class="col-md-6 border-start border-5 border-primary">
             <p class="fw-bold">Roles asignados</p>
             @forelse($medico->user->roles as $role)
               <span class="badge rounded-pill bg-dark text-white">{{ $role->name }}</span>

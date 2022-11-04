@@ -45,4 +45,9 @@ class Medico extends Model
     {
         return $this->belongsTo(User::class,'user_id');
     }
+
+    public function especialidades()
+    {
+        return $this->belongsToMany('App\Models\Especialidades');
+    }
 }

@@ -17,7 +17,7 @@
         <a href="{{ route('consultorios.create') }}" class="btn btn-primary btn-sm" title="Registrar consultorio"><i class="fa fa-edit"></i> Registrar</a>
       </div>
       <div class="block-content block-content-full">
-        <table class="table table-bordered table-striped table-vcenter js-dataTable-full table-sm" id="consultoriosTable">
+        <table class="table table-bordered table-striped table-vcenter js-dataTable-full table-sm" id="consultoriosTable" style="font-size: 12px;">
           <thead>
             <tr>
               <th>Nombre</th>
@@ -36,7 +36,6 @@
     $(document).ready( function () {
       $('#consultoriosTable').DataTable({
         oLanguage: {
-          sProcessing  : "<i class='fa fa-spinner fa-spin'></i> Cargando registros...",
           searchPlaceholder: "Buscar registro",
         },
         language: {

@@ -101,15 +101,18 @@ class PacienteController extends Controller
         foreach($arrData as $key){
             $ver = '<a href="pacientes/'.$key->slug.'" title="Ver datos del médico">'.$key->nombre.' '.$key->apellido.'</a>';
             if ($key->status=="Activo") {
-                $status = '<span class="badge badge-success">'.$key->status.'</span>';
+                $status = '<span class="badge bg-success">'.$key->status.'</span>';
             } else {
-                $status = '<span class="badge badge-danger">'.$key->status.'</span>';
+                $status = '<span class="badge bg-danger">'.$key->status.'</span>';
             }
+
+            $telefono = '<a href="https://api.whatsapp.com/send?phone='.$key->telefono.'&text=Hola '.$key->nombre.' '.$key->apellido.'" title="Enviar mensaje al paciente." target="_blank" class="text-success"><span class="badge bg-success">'.$key->telefono.' <i class="fab fa-whatsapp"></i></span></a>';
+            $email = '<a href="mailto:'.$key->email.'">'.$key->email.'</a>';
             $response['data'][] = [
                 "nombre"                    => $ver,
                 "numero_identificacion"     => $key->numero_identificacion,
-                "telefono"                  => $key->telefono,
-                "email"                     => $key->email,
+                "telefono"                  => $telefono,
+                "email"                     => $email,
                 "acciones"                  => $this->accionesIndex($key->slug)
             ];
         }

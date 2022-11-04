@@ -8,6 +8,9 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\MedicoController;
 use App\Http\Controllers\PacienteController;
+use App\Http\Controllers\ServicioController;
+use App\Http\Controllers\EspecialidadeController;
+use App\Http\Controllers\ExcelController;
 
 /*
 |--------------------------------------------------------------------------
@@ -51,15 +54,20 @@ Route::group(['middleware' => ['web', 'auth']], function() {
     Route::get('/medicos/get-index',[MedicoController::class, 'getIndex']);
     #########------------------------PACIENTES---------------------------------------------------########
     Route::get('/pacientes/get-index',[PacienteController::class, 'getIndex']);
+    #########------------------------PACIENTES---------------------------------------------------########
+    Route::get('/excel/pacientes',[ExcelController::class, 'pacientes'])->name('excel.pacientes');
     #########------------------------Resources---------------------------------------------------########
     Route::resources([
-        'users'             => UsersController::class,
-        'empresas'          => EmpresaController::class,
-        'consultorios'      => ConsultorioController::class,
-        'roles'             => RoleController::class,
-        'permissions'       => PermissionController::class,
-        'medicos'           => MedicoController::class,
-        'pacientes'         => PacienteController::class,
+        'users'          => UsersController::class,
+        'empresas'       => EmpresaController::class,
+        'consultorios'   => ConsultorioController::class,
+        'roles'          => RoleController::class,
+        'permissions'    => PermissionController::class,
+        'medicos'        => MedicoController::class,
+        'pacientes'      => PacienteController::class,
+        'servicios'      => ServicioController::class,
+        'especialidades' => EspecialidadeController::class,
+        'excel'          => ExcelController::class,
     ]);
 });
 

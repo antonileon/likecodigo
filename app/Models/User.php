@@ -29,11 +29,12 @@ class User extends Authenticatable
         'tipo_usuario_id',
         'nombre',
         'apellido',
+        'email',
         'nombre_usuario',
         'slug',
+        'password',
         'status',
-        'email',
-        'password'
+        'tema'
     ];
 
     /**

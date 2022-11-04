@@ -17,7 +17,7 @@
         <a href="{{ route('permissions.create') }}" class="btn btn-primary btn-sm" title="Registrar rol"><i class="fa fa-edit"></i> Registrar</a>
       </div>
       <div class="block-content block-content-full">
-        <table class="table table-bordered table-striped table-vcenter js-dataTable-full table-sm" id="permisosTable">
+        <table class="table table-bordered table-striped table-vcenter js-dataTable-full table-sm" id="permisosTable" style="font-size: 12px;">
           <thead>
             <tr>
               <th>Descripción</th>
