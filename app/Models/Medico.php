@@ -9,6 +9,7 @@ use Spatie\Sluggable\SlugOptions;
 use App\Models\TipoDocumento;
 use App\Models\Persona;
 use App\Models\User;
+use App\Models\Especialidade;
 
 class Medico extends Model
 {
@@ -48,6 +49,6 @@ class Medico extends Model
 
     public function especialidades()
     {
-        return $this->belongsToMany('App\Models\Especialidades');
+        return $this->belongsToMany('App\Models\Especialidade','especialidade_has_medicos','medico_id','especialidade_id');
     }
 }

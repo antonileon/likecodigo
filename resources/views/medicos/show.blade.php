@@ -106,7 +106,11 @@
         <div class="row mb-4">
           <div class="col-md-6 border-start border-5 border-primary">
             <p class="fw-bold">Especialidades</p>
-            
+            @forelse($medico->especialidades as $especialidad)
+              <span class="badge rounded-pill bg-dark text-white">{{ $especialidad->especialidad }}</span>
+            @empty
+              <span class="badge badge-danger bg-danger">No posee especialidades asignadas.</span>
+            @endforelse
           </div>
           <div class="col-md-6 border-start border-5 border-primary">
             <p class="fw-bold">Roles asignados</p>
@@ -114,7 +118,7 @@
               <span class="badge rounded-pill bg-dark text-white">{{ $role->name }}</span>
             @empty
               <span class="badge badge-danger bg-danger">No posee roles asignados.</span>
-            @endforelse            
+            @endforelse
           </div>
         </div>
       </div>

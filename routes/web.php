@@ -56,6 +56,8 @@ Route::group(['middleware' => ['web', 'auth']], function() {
     Route::get('/pacientes/get-index',[PacienteController::class, 'getIndex']);
     #########------------------------PACIENTES---------------------------------------------------########
     Route::get('/excel/pacientes',[ExcelController::class, 'pacientes'])->name('excel.pacientes');
+    #########------------------------ESPECIALIDADES----------------------------------------------########
+    Route::get('/especialidades/get-index',[EspecialidadeController::class, 'getIndex']);
     #########------------------------Resources---------------------------------------------------########
     Route::resources([
         'users'          => UsersController::class,
