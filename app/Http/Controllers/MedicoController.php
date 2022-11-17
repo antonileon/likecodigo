@@ -193,8 +193,7 @@ class MedicoController extends Controller
             'persona_id'                => $persona->id,
             'slug'                      => $request->nombre
         ]);
-
-        $medico->especialidade()->sync($request->especialidade_id);
+        $medico->especialidades()->sync($request->especialidade_id);
 
         toast('Médico '.strtoupper($request->nombre).' registrado con éxito.','success');
         return redirect()->route('medicos.index');
@@ -220,7 +219,8 @@ class MedicoController extends Controller
     public function edit(Medico $medico)
     {
         $tipoDocumentos = TipoDocumento::all();
-        return view('medicos.edit', compact('tipoDocumentos','medico'));
+        $especialidades = Especialidade::all();
+        return view('medicos.edit', compact('tipoDocumentos','medico','especialidades'));
     }
 
     /**
@@ -245,6 +245,8 @@ class MedicoController extends Controller
         $user->apellido=$request->apellido;
         $user->email=$request->email;
         $user->save();
+
+        $medico->especialidades()->sync($request->especialidade_id);
 
         toast('Médico '.strtoupper($request->nombre).' modificado con éxito.','success');
         return redirect()->route('medicos.index');

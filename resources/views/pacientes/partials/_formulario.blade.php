@@ -18,7 +18,7 @@
           <select name="tipo_documento_id" id="tipo_documento_id" class="form-select js-select2" data-placeholder="Eliga una opción..">
             @foreach($tipoDocumentos as $tipoDocumento)
               <option></option>
-              <option value="{{ $tipoDocumento->id }}" {{ old('tipo_documento_id' , $medico->persona->tipo_documento_id)==$tipoDocumento->id? 'selected' : '' }}>{{ $tipoDocumento->nombre }}</option>
+              <option value="{{ $tipoDocumento->id }}" {{ old('tipo_documento_id' , $paciente->persona->tipo_documento_id)==$tipoDocumento->id? 'selected' : '' }}>{{ $tipoDocumento->nombre }}</option>
             @endforeach
           </select>
         </div>
@@ -26,13 +26,13 @@
       <div class="col-md-4">
         <div class="form-group">
           <label class="form-label" for="numero_identificacion">Número de identificación <b style="color:red;">*</b></label>
-          <input type="text" class="form-control" name="numero_identificacion" id="numero_identificacion" placeholder="Número de identificación" value="{{ old('numero_identificacion', empty($medico->persona->numero_identificacion)?'':$medico->persona->numero_identificacion) }}" required>
+          <input type="text" class="form-control" name="numero_identificacion" id="numero_identificacion" placeholder="Número de identificación" value="{{ old('numero_identificacion', empty($paciente->persona->numero_identificacion)?'':$paciente->persona->numero_identificacion) }}" required>
         </div>
       </div>
       <div class="col-md-4">
         <div class="form-group">
           <label class="form-label" for="nombre">Nombre <b style="color:red;">*</b></label>
-          <input type="text" class="form-control" name="nombre" id="nombre" placeholder="Nombre" value="{{ old('nombre', empty($medico->persona->nombre)?'':$medico->persona->nombre) }}" required>
+          <input type="text" class="form-control" name="nombre" id="nombre" placeholder="Nombre" value="{{ old('nombre', empty($paciente->persona->nombre)?'':$paciente->persona->nombre) }}" required>
         </div>
       </div>
     </div>
@@ -40,19 +40,19 @@
       <div class="col-md-4">
         <div class="form-group">
           <label class="form-label" for="apellido">Apellido <b style="color:red;">*</b></label>
-          <input type="text" class="form-control" name="apellido" id="apellido" placeholder="Apellido" value="{{ old('apellido', empty($medico->persona->apellido)?'':$medico->persona->apellido) }}" required>
+          <input type="text" class="form-control" name="apellido" id="apellido" placeholder="Apellido" value="{{ old('apellido', empty($paciente->persona->apellido)?'':$paciente->persona->apellido) }}" required>
         </div>
       </div>
       <div class="col-md-4">
         <div class="form-group">
           <label class="form-label" for="fecha_nacimiento">Fecha de nacimiento <b style="color:red;">*</b></label>
-          <input type="date" class="form-control" name="fecha_nacimiento" id="fecha_nacimiento" value="{{ old('fecha_nacimiento', empty($medico->persona->fecha_nacimiento)?'':$medico->persona->fecha_nacimiento) }}" max="{{ date('Y-m-d') }}" required>
+          <input type="date" class="form-control" name="fecha_nacimiento" id="fecha_nacimiento" value="{{ old('fecha_nacimiento', empty($paciente->persona->fecha_nacimiento)?'':$paciente->persona->fecha_nacimiento) }}" max="{{ date('Y-m-d') }}" required>
         </div>
       </div>
       <div class="col-md-4">
         <div class="form-group">
           <label class="form-label" for="telefono">Teléfono <b style="color:red;">*</b></label>
-          <input type="text" class="form-control" name="telefono" id="telefono" placeholder="Teléfono" value="{{ old('telefono', empty($medico->persona->telefono)?'':$medico->persona->telefono) }}" required>
+          <input type="text" class="form-control" name="telefono" id="telefono" placeholder="Teléfono" value="{{ old('telefono', empty($paciente->persona->telefono)?'':$paciente->persona->telefono) }}" required>
         </div>
       </div>
     </div>
@@ -60,25 +60,7 @@
       <div class="col-md-4">
         <div class="form-group">
           <label class="form-label" for="email">Email <b style="color:red;">*</b></label>
-          <input type="email" class="form-control" name="email" id="email" placeholder="Email" value="{{ old('email', empty($medico->user->email)?'':$medico->user->email) }}" required>
-        </div>
-      </div>
-    </div>
-    <h2 class="content-heading">Editar especialidades</h2>
-    <div class="row mb-4">
-      <div class="col-lg-4">
-        <p class="text-muted">
-          Puede seleccionar múltiples especialidades para asignar a este médico.
-        </p>
-      </div>
-      <div class="col-lg-8 col-xl-8">
-        <div class="mb-4">
-          <select class="js-select2 form-select" id="especialidade_id" name="especialidade_id[]" style="width: 100%;" data-placeholder="Elige especialidades.." multiple required>
-            <option></option>
-            @foreach($especialidades as $especialidad)
-              <option value="{{ $especialidad->id }}" {{ $medico->especialidades->contains($especialidad->id) ? 'selected' : '' }}>{{ $especialidad->especialidad }}</option>
-            @endforeach
-          </select>
+          <input type="email" class="form-control" name="email" id="email" placeholder="Email" value="{{ old('email', empty($paciente->user->email)?'':$paciente->user->email) }}" required>
         </div>
       </div>
     </div>

@@ -61,7 +61,7 @@
         ]
       });
     });
-    //--CODIGO PARA ELIMINAR EMPRESA------------------//
+    //--CODIGO PARA ELIMINAR PACIENTES------------------//
     $('body').on('click', '#eliminarPaciente', function() {
       var id = $(this).data('mc');
       Swal.fire({
@@ -86,18 +86,11 @@
             data: { id: id },
             dataType: 'json',
             success: function(data){
-              Toast.fire({
-                icon: data.icono,
-                title: data.mensaje
-              })
-              var oTable = $('#pacientesTable').dataTable();
-              oTable.fnDraw(false);
+              alerta(data.tipo,data.mensaje)
+              actualizaTabla('pacientesTable')
             },
             error: function (data) {
-              Toast.fire({
-                icon: 'error',
-                title: 'Error del servidor, paciente no eliminado.'
-              })
+              errorSistema()
             }
           });
         }

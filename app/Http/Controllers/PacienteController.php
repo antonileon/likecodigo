@@ -200,7 +200,7 @@ class PacienteController extends Controller
      */
     public function show(Paciente $paciente)
     {
-        //
+        return view('pacientes.show', compact('paciente'));
     }
 
     /**
@@ -211,7 +211,8 @@ class PacienteController extends Controller
      */
     public function edit(Paciente $paciente)
     {
-        //
+        $tipoDocumentos = TipoDocumento::all();
+        return view('pacientes.edit', compact('tipoDocumentos','paciente'));
     }
 
     /**
@@ -221,9 +222,24 @@ class PacienteController extends Controller
      * @param  \App\Models\Paciente  $paciente
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdatePacienteRequest $request, Paciente $paciente)
+    public function update(Request $request, Paciente $paciente)
     {
-        //
+        $persona = Persona::findOrFail($paciente->persona_id);
+        $persona->tipo_documento_id=$request->tipo_documento_id;
+        $persona->numero_identificacion=$request->numero_identificacion;
+        $persona->nombre=$request->nombre;
+        $persona->apellido=$request->apellido;
+        $persona->fecha_nacimiento=$request->fecha_nacimiento;
+        $persona->save();
+
+        $user = User::findOrFail($paciente->user_id);
+        $user->nombre=$request->nombre;
+        $user->apellido=$request->apellido;
+        $user->email=$request->email;
+        $user->save();
+
+        toast('Paciente '.strtoupper($request->nombre).' modificado con éxito.','success');
+        return redirect()->route('pacientes.index');
     }
 
     /**
@@ -234,6 +250,19 @@ class PacienteController extends Controller
      */
     public function destroy(Paciente $paciente)
     {
-        //
+        $paciente->persona->delete();
+        $paciente->user->delete();
+        if ($paciente->delete()) {
+            $return = [
+                'tipo' => 'success',
+                'mensaje' => 'Paciente eliminado con éxito.'
+            ];
+        } else {
+            $return = [
+                'tipo' => 'error',
+                'mensaje' => 'Error al eliminar paciente, por favor inténtelo nuevamente.'
+            ];
+        }        
+        return response()->json($return);
     }
 }

@@ -1,8 +1,6 @@
 @extends('layouts.app')
 @section('title', __('Ver médico'))
 @section('css')
-  <!-- Page JS Plugins CSS -->
-  <link rel="stylesheet" href="{{ asset('js/plugins/datatables/dataTables.bootstrap4.css') }}">
 @endsection
 
 @section('content')
