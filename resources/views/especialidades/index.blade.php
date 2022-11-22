@@ -57,6 +57,7 @@
         order: [[0, 'desc']],
         columnDefs:[
           {targets: [2], orderable: false},
+          {targets: [3], orderable: false},
         ]
       });
     });
@@ -124,6 +125,11 @@
     $('#SubmitEditarEspecialidad').click(function(e) {
       e.preventDefault();
       var id = $('#inputSlugEspecialidad').val();
+      let especialidad = $("#inputEspecialidad").val();
+      if (especialidad=='') {
+        alerta('warning','El campo especialidad es obligatorio.')
+        return false;
+      }
       $.ajaxSetup({
         headers: {
           'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -133,7 +139,7 @@
         method:'PUT',
         url: "especialidades/"+id+"",
         data: {
-          especialidad: $('#inputEspecialidad').val(),
+          especialidad: especialidad,
         },
         success: (data) => {
           if (data.tipo=="success") {

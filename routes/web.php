@@ -11,6 +11,7 @@ use App\Http\Controllers\PacienteController;
 use App\Http\Controllers\ServicioController;
 use App\Http\Controllers\EspecialidadeController;
 use App\Http\Controllers\ExcelController;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,7 +36,9 @@ Route::middleware('guest')->group(function () {
 
 Auth::routes();
 Route::group(['middleware' => ['web', 'auth']], function() {
+    ########------------------------DASHBOARD-----------------------------------------------------########
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::post('/home/buscarPacientesAll',[HomeController::class, 'buscarPacientesAll']);
     ########------------------------USUARIOS-----------------------------------------------------########
     Route::controller(UsersController::class)->group(function() {
         Route::get('/users/get-index', 'getIndex');
@@ -58,6 +61,8 @@ Route::group(['middleware' => ['web', 'auth']], function() {
     Route::get('/excel/pacientes',[ExcelController::class, 'pacientes'])->name('excel.pacientes');
     #########------------------------ESPECIALIDADES----------------------------------------------########
     Route::get('/especialidades/get-index',[EspecialidadeController::class, 'getIndex']);
+    ##########------------------------ESPECIALIDADES----------------------------------------------########
+    Route::get('/servicios/get-index',[ServicioController::class, 'getIndex']);
     #########------------------------Resources---------------------------------------------------########
     Route::resources([
         'users'          => UsersController::class,

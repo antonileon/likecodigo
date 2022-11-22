@@ -29,3 +29,4 @@
 	<!-- Fonts and Styles -->
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,400i,600,700">
 	<link rel="stylesheet" id="css-main" href="{{ asset('/css/codebase.css') }}">
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">

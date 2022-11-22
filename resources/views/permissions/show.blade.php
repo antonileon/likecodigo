@@ -6,7 +6,7 @@
 @section('content')
   <!-- Page Content -->
   <div class="content">
-    <nav class="breadcrumb bg-white push">
+    <nav class="breadcrumb push bg-body-extra-light rounded-pill px-4 py-2">
       <a class="breadcrumb-item" href="javascript:void(0)">Permisos</a>
       <span class="breadcrumb-item active">Ver</span>
     </nav>
@@ -17,11 +17,11 @@
         <a href="{{ route('permissions.index') }}" class="btn btn-primary btn-sm" title="Regresar al listado"><i class="fa fa-arrow-left"></i> Regresar</a>
       </div>
       <div class="block-content block-content-full">
-        <div class="col-sm-12 py-10">
-          <h3 class="h5 font-w700 mb-10">
+        <div class="col-sm-12">
+          <h3 class="h5 font-w700">
             <i class="fa fa-circle text-success mr-5"></i> {{ $permission->description }}
           </h3>
-          <p class="font-size-sm mb-10">
+          <p class="font-size-sm">
             <a class="mr-5 mb-5" href="javascript:void(0)">{{ $permission->name }}</a>
           </p>
           <p class="font-size-sm text-muted mb-0">

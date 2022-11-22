@@ -58,9 +58,7 @@ class EspecialidadeController extends Controller
             $totalFilter = $totalFilter->where('empresa_id',\Auth::User()->empresa->id);
         }
         if (!empty($searchValue)) {
-            $totalFilter = $totalFilter->where('personas.nombre','like','%'.$searchValue.'%');
-            $totalFilter = $totalFilter->orWhere('personas.apellido','like','%'.$searchValue.'%');
-            $totalFilter = $totalFilter->orWhere('personas.numero_identificacion','like','%'.$searchValue.'%');
+            $totalFilter = $totalFilter->where('especialidad','like','%'.$searchValue.'%');
         }
         $totalFilter = $totalFilter->count();
 
@@ -76,9 +74,7 @@ class EspecialidadeController extends Controller
         $arrData = $arrData->skip($start)->take($rowPerPage);
         $arrData = $arrData->orderBy($columnName,$columnSortOrder);
         if (!empty($searchValue)) {
-            $arrData = $arrData->where('personas.nombre','like','%'.$searchValue.'%');
-            $arrData = $arrData->orWhere('personas.apellido','like','%'.$searchValue.'%');
-            $arrData = $arrData->orWhere('personas.numero_identificacion','like','%'.$searchValue.'%');
+            $arrData = $arrData->where('especialidad','like','%'.$searchValue.'%');
         }
         $arrData = $arrData->orderby('id','DESC')->get();
 

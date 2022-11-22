@@ -17,10 +17,11 @@ class Servicio extends Model
     use HasFactory, Notifiable;
     use HasRoles, HasSlug;
 
-    protected $table = "servicio";
+    protected $table = "servicios";
 
     protected $fillable = [
-        'servicio'
+        'servicio',
+        'precio'
     ];
 
     public function getSlugOptions() : SlugOptions

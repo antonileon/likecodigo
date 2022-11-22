@@ -177,7 +177,17 @@ class RoleController extends Controller
      */
     public function destroy(Role $role)
     {
-        $role->delete();
-        return response()->json(['mensaje'=>"Rol eliminado con éxito.",'icono'=>'success']);
+        if ($role->delete()) {
+            $return = [
+                'tipo'    => 'success',
+                'mensaje' => 'Rol eliminado exitosamente.'
+            ];
+        } else {
+            $return = [
+                'tipo'    => 'error',
+                'mensaje' => '¡Error! Rol no eliminado, por favor inténtelo nuevamente.'
+            ];   
+        }
+        return response()->json($return);
     }
 }

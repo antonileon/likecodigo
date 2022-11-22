@@ -15,12 +15,14 @@ return new class extends Migration
     {
         Schema::create('servicios', function (Blueprint $table) {
             $table->id();
+            $table->string('slug')->unique();
             $table->foreignId('empresa_id')
                     ->nullable()
                     ->constrained()
                     ->onUpdate('cascade')
                     ->onDelete('cascade');
             $table->string('servicio',120);
+            $table->double('precio',120);
             $table->timestamps();
         });
     }

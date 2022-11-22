@@ -144,10 +144,9 @@
           <button type="button" class="btn btn-secondary" data-toggle="layout" data-action="header_search_off">
             <i class="fa fa-fw fa-times"></i>
           </button>
-          <input type="text" class="form-control" placeholder="Busca o presiona ESC.." id="page-header-search-input" name="page-header-search-input">
-          <button type="submit" class="btn btn-secondary">
-            <i class="fa fa-fw fa-search"></i>
-          </button>
+          
+          <select name="buscarPacientes" id="buscarPacientes" class="form-control" style="width:90%;"></select>
+          
         </div>
       </form>
     </div>
@@ -159,5 +158,31 @@
       </div>
     </div>
   </div>
-  
 </header>
+@section('scripts')
+<script>
+  $(document).ready(function() {
+    // Iniciamos select2
+    $("#buscarPacientes").select2({
+      placeholder: "Busque un paciente...",
+      minimumInputLength: 3,
+      ajax: {
+        url: "{{ url('home/buscarPacientesAll') }}",
+        type: "POST",
+        delay: 250,
+        dataType: 'json',
+        data: function(params) {
+          return {
+            query: params.term, // search term
+            "_token": "{{ csrf_token() }}",
+          };
+        },
+        processResults: function(response) {
+          return { results: response };
+        },
+        cache: true
+      }
+    });
+  });
+</script>
+@endsection

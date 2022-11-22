@@ -63,7 +63,7 @@ class PermissionController extends Controller
             "data" => [],
         );
         foreach($arrData as $key){
-            $ver = '<a href="empresas/'.$key->id.'" title="'.$key->description.'">'.$key->description.'</a>';
+            $ver = '<a href="permissions/'.$key->id.'" title="'.$key->description.'">'.$key->description.'</a>';
             $response['data'][] = [
                 "description"               => $ver,
                 "name"                      => $key->name,
@@ -77,7 +77,9 @@ class PermissionController extends Controller
     public function accionesIndex($id)
     {
         $acciones ='
-            <button type="button" class="btn btn-primary dropdown-toggle btn-sm btn-block" data-toggle="dropdown">Acciones</button>
+            <button type="button" class="btn btn-sm btn-primary btn-block" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-haspopup="true" aria-expanded="false">
+                Acciones <i class="fa fa-angle-down opacity-50 ms-1"></i>
+            </button>
             <div class="dropdown-menu">
                 <a href="permissions/'.$id.'" class="dropdown-item" title="Ver permiso">
                     <i class="fa fa-pencil"></i> Ver
@@ -160,7 +162,17 @@ class PermissionController extends Controller
      */
     public function destroy(Permission $permission)
     {
-        $permission->delete();
-        return response()->json(['mensaje'=>"Permiso eliminado con éxito.",'icono'=>'success']);
+        if ($permission->delete()) {
+            $return = [
+                'tipo'    => 'success',
+                'mensaje' => 'Permiso eliminado exitosamente.'
+            ];
+        } else {
+            $return = [
+                'tipo'    => 'error',
+                'mensaje' => '¡Error! Permiso no eliminado, por favor inténtelo nuevamente.'
+            ];   
+        }
+        return response()->json($return);
     }
 }

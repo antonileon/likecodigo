@@ -41,5 +41,47 @@ class RoleSeeder extends Seeder
             'name'              => 'empresas.destroy',
             'description'       => 'Eliminar empresa'
         ])->assignRole($role1);
+        // ESPECIALIDADES
+        Permission::create([
+            'name'              => 'especialidades.index',
+            'description'       => 'Ver listado de especialidades'
+        ])->assignRole($role1);
+        Permission::create([
+            'name'              => 'especialidades.create',
+            'description'       => 'Registrar especialidad'
+        ])->assignRole($role1);
+        Permission::create([
+            'name'              => 'especialidades.show',
+            'description'       => 'Ver especialidad'
+        ])->assignRole($role1);
+        Permission::create([
+            'name'              => 'especialidades.edit',
+            'description'       => 'Editar especialidad'
+        ])->assignRole($role1);
+        Permission::create([
+            'name'              => 'especialidades.destroy',
+            'description'       => 'Eliminar especialidad'
+        ])->assignRole($role1);
+        // SERVICIOS
+        Permission::create([
+            'name'              => 'servicios.index',
+            'description'       => 'Ver listado de servicios'
+        ])->assignRole($role1);
+        Permission::create([
+            'name'              => 'servicios.create',
+            'description'       => 'Registrar servicio'
+        ])->assignRole($role1);
+        Permission::create([
+            'name'              => 'servicios.show',
+            'description'       => 'Ver servicio'
+        ])->assignRole($role1);
+        Permission::create([
+            'name'              => 'servicios.edit',
+            'description'       => 'Editar servicio'
+        ])->assignRole($role1);
+        Permission::create([
+            'name'              => 'servicios.destroy',
+            'description'       => 'Eliminar servicio'
+        ])->assignRole($role1);
     }
 }

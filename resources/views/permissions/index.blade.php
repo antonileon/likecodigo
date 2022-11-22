@@ -81,19 +81,12 @@
             url: "permissions/"+id+"",
             data: { id: id },
             dataType: 'json',
-            success: function(data){
-              Toast.fire({
-                icon: data.icono,
-                title: data.mensaje
-              })
-              var oTable = $('#permisosTable').dataTable();
-              oTable.fnDraw(false);
+            success: function(data) {
+              actualizaTabla('permisosTable')
+              alerta(data.tipo,data.mensaje)
             },
             error: function (data) {
-              Toast.fire({
-                icon: 'error',
-                title: 'Error del servidor, rol no eliminado.'
-              })
+              errorSistema()
             }
           });
         }
