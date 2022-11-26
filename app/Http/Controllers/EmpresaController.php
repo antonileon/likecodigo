@@ -76,7 +76,7 @@ class EmpresaController extends Controller
             "data" => [],
         );
         foreach($arrData as $key){
-            $ver = '<a href="empresas/'.$key->slug.'" title="Ver datos de empresa">'.$key->nombre.'</a>';
+            $ver = '<a href="empresas/'.$key->slug.'" title="Ver datos de empresa">'.strtoupper($key->nombre).'</a>';
             if ($key->status=="Activo") {
                 $status = '<span class="badge bg-success"><i class="fa fa-check me-1"></i>'.$key->status.'</span>';
             } else {

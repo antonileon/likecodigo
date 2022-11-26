@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Medico;
 use App\Models\Paciente;
+use App\Models\Menu;
+use Route;
 
 class HomeController extends Controller
 {
@@ -25,6 +27,12 @@ class HomeController extends Controller
      */
     public function index()
     {
+        /*$menu = Menu::where('status','1')->orderby('orden','ASC')->get();
+        foreach($menu as $key) {
+            foreach($key->subMenu as $k){
+                dd($k);
+            }
+        }*/
         $totalMedicos = Medico::select([
             'medicos.id',
             'users.empresa_id'

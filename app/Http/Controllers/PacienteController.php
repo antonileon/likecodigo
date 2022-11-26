@@ -99,7 +99,7 @@ class PacienteController extends Controller
             "data" => [],
         );
         foreach($arrData as $key){
-            $ver = '<a href="pacientes/'.$key->slug.'" title="Ver datos del médico">'.$key->nombre.' '.$key->apellido.'</a>';
+            $ver = '<a href="pacientes/'.$key->slug.'" title="Ver datos del médico">'.strtoupper($key->nombre.' '.$key->apellido).'</a>';
             if ($key->status=="Activo") {
                 $status = '<span class="badge bg-success">'.$key->status.'</span>';
             } else {

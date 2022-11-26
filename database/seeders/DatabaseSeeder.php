@@ -20,6 +20,8 @@ class DatabaseSeeder extends Seeder
         $this->call(UsersTableSeeder::class);
         \App\Models\Consultorio::factory(5)->create();
         $this->call(EspecialidadeSeeder::class);
+        $this->call(MenuSeeder::class);
+        $this->call(SubMenuSeeder::class);
         //\App\Models\Empresa::factory(5)->create();
     }
 }

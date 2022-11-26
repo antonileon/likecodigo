@@ -8,27 +8,33 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
-use App\Models\Empresa;
-use App\Models\Cita;
+use App\Models\Menu;
+use App\Models\SubMenu;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
+use Route;
 
-class Servicio extends Model
+class Menu extends Model
 {
     use HasFactory, Notifiable;
     use HasRoles, HasSlug;
 
-    protected $table = "servicios";
+    protected $table = "menus";
 
     protected $fillable = [
-        'servicio',
-        'precio'
+        'slug',
+        'nombre',
+        'descripcion',
+        'ruta',
+        'url',
+        'icono',
+        'orden',
+        'status'
     ];
-
     public function getSlugOptions() : SlugOptions
     {
         return SlugOptions::create()
-            ->generateSlugsFrom('servicio')
+            ->generateSlugsFrom('nombre')
             ->saveSlugsTo('slug');
     }
     
@@ -37,8 +43,19 @@ class Servicio extends Model
         return 'slug';
     }
 
-    public function cita()
+    public function getMenu(){
+        $routeName=Route::currentRouteName();
+
+        $menu = Menu::where('status','1')->orderby('orden','ASC')->get();
+
+        return [
+            'menu'      => $menu,
+            'routeName' => $routeName
+        ];
+    }
+
+    public function subMenu()
     {
-        return $this->hasOne(Cita::class);
+        return $this->hasMany(SubMenu::class);
     }
 }

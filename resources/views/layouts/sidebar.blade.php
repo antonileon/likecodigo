@@ -48,78 +48,38 @@
       </div>
       <div class="content-side content-side-full">
         <ul class="nav-main">
-          <li class="nav-main-item">
-            <a class="nav-main-link {{ request()->is('home') ? ' active' : '' }}" href="{{ route('home') }}" href="{{ route('home') }}">
-              <i class="nav-main-link-icon fa fa-user"></i>
-              <span class="nav-main-link-name">Dashboard</span>
-            </a>
-          </li>
-          <li class="nav-main-item">
-            <a class="nav-main-link {{ request()->is('empresas*') ? ' active' : '' }}" href="{{ route('empresas.index') }}">
-              <i class="nav-main-link-icon fa fa-building"></i>
-              <span class="nav-main-link-name">Empresas</span>
-            </a>
-          </li>
-          <li class="nav-main-item">
-            <a class="nav-main-link {{ request()->is('consultorios*') ? ' active' : '' }}" href="{{ route('consultorios.index') }}">
-              <i class="nav-main-link-icon fa fa-hospital"></i>
-              <span class="nav-main-link-name">Consultorios</span>
-            </a>
-          </li>
-          <li class="nav-main-item">
-            <a class="nav-main-link {{ request()->is('medicos*') ? ' active' : '' }}" href="{{ route('medicos.index') }}">
-              <i class="nav-main-link-icon fa fa-user-doctor"></i>
-              <span class="nav-main-link-name">Médicos</span>
-            </a>
-          </li>
-          <li class="nav-main-item">
-            <a class="nav-main-link {{ request()->is('pacientes*') ? ' active' : '' }}" href="{{ route('pacientes.index') }}">
-              <i class="nav-main-link-icon fa fa-user-tie"></i>
-              <span class="nav-main-link-name">Pacientes</span>
-            </a>
-          </li>
-          <li class="nav-main-item">
-            <a class="nav-main-link {{ request()->is('especialidades*') ? ' active' : '' }}" href="{{ route('especialidades.index') }}">
-              <i class="nav-main-link-icon fa-solid fa-stethoscope"></i>
-              <span class="nav-main-link-name">Especialidades</span>
-            </a>
-          </li>
-          <li class="nav-main-item">
-            <a class="nav-main-link {{ request()->is('servicios*') ? ' active' : '' }}" href="{{ route('servicios.index') }}">
-              <i class="nav-main-link-icon fa-solid fa-tooth"></i>
-              <span class="nav-main-link-name">Servicios</span>
-            </a>
-          </li>
-          <li class="nav-main-heading">Administración</li>
-          <li class="nav-main-item">
-            <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
-              <i class="nav-main-link-icon fa fa-grip-vertical"></i>
-              <span class="nav-main-link-name">Panel de control</span>
-            </a>
-            <ul class="nav-main-submenu">
+          @forelse(getMenu()['menu'] as $key)
+            @if(!empty($key->ruta))
               <li class="nav-main-item">
-                <a class="nav-main-link" href="{{ route('users.index') }}">
-                  <span class="nav-main-link-name">Usuarios</span>
+                <a class="nav-main-link {{ request()->is($key->url) ? ' active' : '' }}" href="{{ route($key->ruta) }}">
+                  <i class="nav-main-link-icon {{ $key->icono }}"></i>
+                  <span class="nav-main-link-name">{{ $key->nombre }}</span>
                 </a>
               </li>
-              <li class="nav-main-item">
-                <a class="nav-main-link" href="{{ route('roles.index') }}">
-                  <span class="nav-main-link-name">Roles</span>
-                </a>
-              </li>
-              <li class="nav-main-item">
-                <a class="nav-main-link" href="{{ route('permissions.index') }}">
-                  <span class="nav-main-link-name">Permisos</span>
-                </a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-main-item">
-            <a class="nav-main-link {{ request()->is('home') ? ' active' : '' }}" href="{{ route('home') }}" href="{{ route('home') }}">
-              <i class="nav-main-link-icon fa fa-cogs"></i>
-              <span class="nav-main-link-name">Administrador</span>
-            </a>
-          </li>
+            @else
+              @if($key->subMenu->count() > 0)
+                <li class="nav-main-item">
+                  <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
+                    <i class="nav-main-link-icon {{ $key->icono }}"></i>
+                    <span class="nav-main-link-name">{{ $key->nombre }}</span>
+                  </a>
+                  <ul class="nav-main-submenu">
+                    @foreach($key->subMenu as $k => $value)
+                      <li class="nav-main-item">
+                        <a class="nav-main-link {{ request()->is($value['url']) ? ' active' : '' }}" href="{{ route($value['ruta']) }}">
+                          <span class="nav-main-link-name">{{ $value['nombre'] }}</span>
+                        </a>
+                      </li>
+                    @endforeach
+                  </ul>
+                </li>
+              @endif
+            @endif
+          @empty
+            <div class="text-center">
+              <span class="badge badge-danger bg-danger">No posee menú.</span>              
+            </div>
+          @endforelse
         </ul>
       </div>      
     </div>    

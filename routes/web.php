@@ -12,6 +12,7 @@ use App\Http\Controllers\ServicioController;
 use App\Http\Controllers\EspecialidadeController;
 use App\Http\Controllers\ExcelController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\CitaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -63,6 +64,8 @@ Route::group(['middleware' => ['web', 'auth']], function() {
     Route::get('/especialidades/get-index',[EspecialidadeController::class, 'getIndex']);
     ##########------------------------ESPECIALIDADES----------------------------------------------########
     Route::get('/servicios/get-index',[ServicioController::class, 'getIndex']);
+    ##########------------------------ESPECIALIDADES----------------------------------------------########
+    Route::get('/citas/get-index',[CitaController::class, 'getIndex']);
     #########------------------------Resources---------------------------------------------------########
     Route::resources([
         'users'          => UsersController::class,
@@ -74,6 +77,7 @@ Route::group(['middleware' => ['web', 'auth']], function() {
         'pacientes'      => PacienteController::class,
         'servicios'      => ServicioController::class,
         'especialidades' => EspecialidadeController::class,
+        'citas' => CitaController::class,
         'excel'          => ExcelController::class,
     ]);
 });

@@ -1,5 +1,6 @@
 <?php
 use App\Models\User;
+use App\Models\Menu;
 
 function tema()
 {
@@ -13,4 +14,11 @@ function calcularEdad($fechaNacimiento)
     $ahora = new DateTime(date("Y-m-d"));
     $diferencia = $ahora->diff($nacimiento);
     return $diferencia->format("%y");
+}
+
+function getMenu()
+{
+	$menu = new Menu();
+	$menu = $menu->getmenu();
+	return $menu;
 }

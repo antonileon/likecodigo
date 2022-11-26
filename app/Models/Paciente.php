@@ -9,6 +9,7 @@ use Spatie\Sluggable\SlugOptions;
 use App\Models\TipoDocumento;
 use App\Models\Persona;
 use App\Models\User;
+use App\Models\Cita;
 
 class Paciente extends Model
 {
@@ -44,5 +45,10 @@ class Paciente extends Model
     public function user()
     {
         return $this->belongsTo(User::class,'user_id');
+    }
+
+    public function cita()
+    {
+        return $this->hasOne(Cita::class);
     }
 }
