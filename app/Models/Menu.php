@@ -29,7 +29,8 @@ class Menu extends Model
         'url',
         'icono',
         'orden',
-        'status'
+        'status',
+        'permiso'
     ];
     public function getSlugOptions() : SlugOptions
     {

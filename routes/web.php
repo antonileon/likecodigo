@@ -66,6 +66,7 @@ Route::group(['middleware' => ['web', 'auth']], function() {
     Route::get('/servicios/get-index',[ServicioController::class, 'getIndex']);
     ##########------------------------ESPECIALIDADES----------------------------------------------########
     Route::get('/citas/get-index',[CitaController::class, 'getIndex']);
+    Route::post('/citas/buscar-pacientes',[CitaController::class, 'buscarPacientes']);
     #########------------------------Resources---------------------------------------------------########
     Route::resources([
         'users'          => UsersController::class,
@@ -77,7 +78,7 @@ Route::group(['middleware' => ['web', 'auth']], function() {
         'pacientes'      => PacienteController::class,
         'servicios'      => ServicioController::class,
         'especialidades' => EspecialidadeController::class,
-        'citas' => CitaController::class,
+        'citas'          => CitaController::class,
         'excel'          => ExcelController::class,
     ]);
 });

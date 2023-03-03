@@ -48,10 +48,11 @@
       </div>
       <div class="content-side content-side-full">
         <ul class="nav-main">
+            {{-- @dd(getMenu())` --}}
           @forelse(getMenu()['menu'] as $key)
-            @if(!empty($key->ruta))
+            @if(!empty($key->ruta) && auth()->user()->can($key->permiso))
               <li class="nav-main-item">
-                <a class="nav-main-link {{ request()->is($key->url) ? ' active' : '' }}" href="{{ route($key->ruta) }}">
+                <a class="nav-main-link {{ request()->is($key->url.'*') ? ' active' : '' }}" href="{{ route($key->ruta) }}">
                   <i class="nav-main-link-icon {{ $key->icono }}"></i>
                   <span class="nav-main-link-name">{{ $key->nombre }}</span>
                 </a>
@@ -66,7 +67,7 @@
                   <ul class="nav-main-submenu">
                     @foreach($key->subMenu as $k => $value)
                       <li class="nav-main-item">
-                        <a class="nav-main-link {{ request()->is($value['url']) ? ' active' : '' }}" href="{{ route($value['ruta']) }}">
+                        <a class="nav-main-link {{ request()->is($value['url'].'*') ? ' active' : '' }}" href="{{ route($value['ruta']) }}">
                           <span class="nav-main-link-name">{{ $value['nombre'] }}</span>
                         </a>
                       </li>

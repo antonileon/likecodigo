@@ -14,7 +14,7 @@
     <div class="block block-rounded">
       <div class="block-header block-header-default">
         <h3 class="block-title"><i class="nav-main-link-icon fa-solid fa-clock"></i> Citas</h3>
-        <a href="javascript:;" class="btn btn-primary btn-sm" title="Registrar especialidad" id="registrarEspecialidad"><i class="fa fa-edit"></i> Registrar</a>
+        <a href="{{ route('citas.create') }}" class="btn btn-primary btn-sm" title="Registrar especialidad" id=""><i class="fa fa-edit"></i> Registrar</a>
       </div>
       <div class="block-content block-content-full">
         <table class="table table-bordered table-striped table-vcenter js-dataTable-full table-sm text-uppercase" id="especialidadesTable" style="font-size: 12px;">
@@ -36,8 +36,8 @@
       </div>
     </div>
   </div>
-@include('especialidades.partials._create')
-@include('especialidades.partials._edit')
+@include('citas.partials._create')
+@include('citas.partials._edit')
 @endsection
 @section('scripts')
   <script type="text/javascript">
@@ -72,9 +72,9 @@
       });
     });
     // ABRIR MODAL DE REGISTRO
-    $("#registrarEspecialidad").click(function() {
-      $('#formRegistrarEspecialidad').trigger("reset");
-      abrirModal('registrar-especialidad')
+    $("#registrarCita").click(function() {
+      $('#formRegistrarCita').trigger("reset");
+      abrirModal('registrar-cita')
     });
     // GUARDAR ESPECIALIDAD
     $('#SubmitRegistrarEspecialidad').click(function(e) {

@@ -92,18 +92,12 @@
             data: { id: id },
             dataType: 'json',
             success: function(data){
-              Toast.fire({
-                icon: data.icono,
-                title: data.mensaje
-              })
+              alerta(data.tipo,data.mensaje)
               var oTable = $('#empresasTable').dataTable();
               oTable.fnDraw(false);
             },
             error: function (data) {
-              Toast.fire({
-                icon: 'error',
-                title: 'Error del servidor, empresa no eliminada.'
-              })
+              alerta('Error','Error del servidor, empresa no eliminada.')
             }
           });
         }

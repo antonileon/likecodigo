@@ -186,7 +186,7 @@ class MedicoController extends Controller
             'nombre_usuario'            => $request->email,
             'email'                     => $request->email,
             'password'                  => bcrypt($request->password)
-        ]);
+        ])->assignRole('Medico');
 
         $medico = Medico::create([
             'user_id'                   => $usuario->id,

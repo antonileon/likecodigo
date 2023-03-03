@@ -132,7 +132,11 @@ class ConsultorioController extends Controller
     public function store(StoreConsultorioRequest $request)
     {
         $consultorio = new Consultorio();
-        $consultorio->empresa_id=$request->empresa_id;
+        if(\Auth::User()->empresa_id==NULL) {
+            $consultorio->empresa_id=$request->empresa_id;
+        } else {
+            $consultorio->empresa_id=\Auth::User()->empresa_id;
+        }
         $consultorio->nombre=$request->nombre;
         $consultorio->telefono=$request->telefono;
         $consultorio->direccion=$request->direccion;

@@ -10,9 +10,14 @@
       </ul>
     </div>
   @endif
+  @if($btnText=="Guardar" && \Auth::User()->empresa_id==NULL)
+    @php  $class = '4' @endphp
+  @else
+    @php  $class = '6' @endphp
+  @endif
   <div class="col-md-12">
     <div class="row mb-4">
-      @if($btnText=="Guardar")
+      @if($btnText=="Guardar" && \Auth::User()->empresa_id==NULL)
       <div class="col-md-4">
         <div class="form-group">
           <label class="form-label" for="empresa_id">Empresa <b style="color:red;">*</b></label>
@@ -20,13 +25,13 @@
         </div>
       </div>
       @endif
-      <div class="col-md-@if($btnText=="Guardar") col-md-4 @else col-md-6 @endif">
+      <div class="col-md-{!! $class !!}">
         <div class="form-group">
           <label class="form-label" for="nombre">Nombre <b style="color:red;">*</b></label>
           <input type="text" class="form-control" name="nombre" id="nombre" placeholder="Nombre" value="{{ old('nombre', $consultorio->nombre) }}">
         </div>
       </div>
-      <div class="@if($btnText=="Guardar") col-md-4 @else col-md-6 @endif">
+      <div class="col-md-{{ $class }}">
         <div class="form-group">
           <label class="form-label" for="telefono">Teléfono <b style="color:red;">*</b></label>
           <input type="text" class="form-control" name="telefono" id="telefono" placeholder="Teléfono" value="{{ old('telefono', $consultorio->telefono) }}">

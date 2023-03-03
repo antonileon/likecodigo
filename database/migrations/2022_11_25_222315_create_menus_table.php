@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('icono',120);
             $table->integer('orden');
             $table->enum('status', [0,1])->default(1);
+            $table->string('permiso',120)->nullable();
             $table->timestamps();
         });
     }

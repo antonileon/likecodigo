@@ -22,6 +22,7 @@
             <tr>
               <th>Nombre</th>
               <th>N° de permisos</th>
+              <th>N° de usuarios</th>
               <th width="20%">Acciones</th>
             </tr>
           </thead>
@@ -48,11 +49,14 @@
         columns: [
           { data: 'name'},
           { data: 'permisos'},
+          { data: 'usuarios'},
           { data: 'acciones'},
         ],
         order: [[0, 'desc']],
         columnDefs:[
           {targets: [1], orderable: false},
+          {targets: [2], orderable: false},
+          {targets: [3], orderable: false},
         ]
       });
     });
